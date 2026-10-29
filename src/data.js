@@ -1,18 +1,18 @@
 /* =========================================================
-   MANISH.DEV — PORTFOLIO GAME LOGIC
+   MANISH.DEV — PORTFOLIO CONTENT
 ========================================================= */
 
-const $ = (selector, parent = document) => parent.querySelector(selector);
-const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
+export const sections = [
+  { id: "character", label: "CHARACTER" },
+  { id: "quests", label: "QUEST LOG" },
+  { id: "skills", label: "SKILL TREE" },
+  { id: "world", label: "WORLD MAP" },
+  { id: "inventory", label: "INVENTORY" },
+  { id: "achievements", label: "ACHIEVEMENTS" },
+  { id: "contact", label: "JOIN PARTY" }
+];
 
-const bootScreen = $("#boot-screen");
-const app = $("#app");
-const startButton = $("#start-game");
-const bootLog = $("#boot-log");
-const bootProgress = $("#boot-progress-bar");
-const toast = $("#toast");
-
-const bootMessages = [
+export const bootMessages = [
   "Loading player profile",
   "Loading skill matrix",
   "Loading quest database",
@@ -21,128 +21,52 @@ const bootMessages = [
   "Synchronizing systems"
 ];
 
-let bootStep = 0;
-
-function runBoot() {
-  const timer = setInterval(() => {
-    if (bootStep >= bootMessages.length) {
-      clearInterval(timer);
-      bootProgress.style.width = "100%";
-      startButton.disabled = false;
-      startButton.textContent = "START GAME";
-      return;
-    }
-
-    const line = document.createElement("div");
-    line.className = "boot-line";
-    line.innerHTML = `<span>${bootMessages[bootStep]}</span><strong>✓</strong>`;
-    bootLog.appendChild(line);
-
-    bootStep += 1;
-    bootProgress.style.width = `${Math.round((bootStep / bootMessages.length) * 100)}%`;
-  }, 320);
-}
-
-runBoot();
-
-startButton.addEventListener("click", () => {
-  bootScreen.style.transition = "opacity .5s ease, transform .5s ease";
-  bootScreen.style.opacity = "0";
-  bootScreen.style.transform = "scale(1.02)";
-
-  setTimeout(() => {
-    bootScreen.remove();
-    app.classList.remove("is-hidden");
-    animateStats();
-    showToast("PLAYER INITIALIZED");
-  }, 500);
-});
-
 /* ---------------------------------------------------------
-   NAVIGATION
+   CHARACTER
 --------------------------------------------------------- */
 
-const navItems = $$(".nav-item");
-const sections = $$(".section");
+export const profile = [
+  ["EXPERIENCE", "11 YEARS"],
+  ["DRUPAL", "9 YEARS / D6 → D11"],
+  ["CURRENT GUILD", "CODECANDY"],
+  ["LOCATION", "INDIA / REMOTE"],
+  ["EDUCATION", "MCA, 2016"],
+  ["LANGUAGES", "EN / HI / GU / MARWARI"]
+];
 
-function openSection(id) {
-  navItems.forEach(item => {
-    item.classList.toggle("active", item.dataset.section === id);
-  });
+export const quickTags = ["PHP 8", "DRUPAL 11", "CIVICRM", "SOLR", "PHPUNIT", "CYPRESS", "DOCKER"];
 
-  sections.forEach(section => {
-    section.classList.toggle("active", section.id === id);
-  });
-
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-navItems.forEach(item => {
-  item.addEventListener("click", () => openSection(item.dataset.section));
-});
-
-/* Keyboard shortcuts */
-const shortcuts = {
-  "1": "character",
-  "2": "quests",
-  "3": "skills",
-  "4": "world",
-  "5": "inventory",
-  "6": "achievements",
-  "7": "contact"
-};
-
-document.addEventListener("keydown", event => {
-  if (event.key in shortcuts && !isTyping()) {
-    openSection(shortcuts[event.key]);
-  }
-
-  if (event.key === "Escape") {
-    const modal = $("#detail-modal");
-    if (modal?.open) modal.close();
-  }
-});
-
-function isTyping() {
-  const tag = document.activeElement?.tagName?.toLowerCase();
-  return tag === "input" || tag === "textarea";
-}
+export const stats = [
+  ["PHP", 95],
+  ["DRUPAL", 93],
+  ["REST / JSON:API", 90],
+  ["MYSQL / MARIADB", 88],
+  ["TESTING", 84],
+  ["CIVICRM", 80],
+  ["JAVASCRIPT", 75],
+  ["REACT", 45]
+];
 
 /* ---------------------------------------------------------
-   STATS ANIMATION
+   QUESTS (PORTFOLIO PROJECTS)
 --------------------------------------------------------- */
 
-let statsAnimated = false;
-
-function animateStats() {
-  if (statsAnimated) return;
-  statsAnimated = true;
-
-  $$(".stat").forEach((stat, index) => {
-    const value = Number(stat.dataset.value || 0);
-    const fill = $(".stat-track i", stat);
-
-    fill.style.width = "0%";
-
-    setTimeout(() => {
-      fill.style.transition = "width 1s cubic-bezier(.2,.8,.2,1)";
-      fill.style.width = `${value}%`;
-    }, 120 + index * 80);
-  });
-}
-
-/* ---------------------------------------------------------
-   QUEST DATA (PORTFOLIO PROJECTS)
---------------------------------------------------------- */
-
-const guilds = {
+export const guilds = {
   codecandy: "CODECANDY / BRIGHT SOLUTIONS · 2022–NOW",
   qed42: "QED42 · 2019–2022",
   addweb: "ADDWEB SOLUTION · 2016–2019",
   softtech: "SOFTTECH INFOSYS · 2015–2016"
 };
 
-const quests = [
+export const questFilters = [
+  ["all", "ALL"],
+  ["codecandy", "CODECANDY"],
+  ["qed42", "QED42"],
+  ["addweb", "ADDWEB"],
+  ["softtech", "SOFTTECH"]
+];
+
+export const quests = [
   {
     id: "banking-dms",
     guild: "codecandy",
@@ -364,75 +288,15 @@ const quests = [
   }
 ];
 
-const modal = $("#detail-modal");
-const modalTitle = $("#modal-title");
-const modalBody = $("#modal-body");
-const modalEyebrow = $("#modal-eyebrow");
-const questList = $("#quest-list");
-const questCounter = $("#quest-counter");
-
-function questEyebrow(quest) {
+export function questEyebrow(quest) {
   return `${quest.type} / ${quest.active ? "ACTIVE" : guilds[quest.guild]}`;
 }
 
-function renderQuests(filter = "all") {
-  const visible = quests.filter(quest => filter === "all" || quest.guild === filter);
-
-  questList.innerHTML = visible.map(quest => `
-    <button class="quest-card ${quest.active ? "active-quest" : "complete"}" data-quest="${quest.id}">
-      <div class="quest-icon">${quest.active ? "◉" : "✓"}</div>
-      <div class="quest-body">
-        <span class="quest-type">${questEyebrow(quest)}</span>
-        <h2>${quest.title}</h2>
-        <p>${quest.summary}</p>
-        <div class="tags">${quest.tags.map(tag => `<span>${tag}</span>`).join("")}</div>
-      </div>
-      <div class="quest-reward"><small>REWARD</small><strong>+${quest.reward} XP</strong></div>
-    </button>
-  `).join("");
-
-  questCounter.textContent = `${String(visible.length).padStart(2, "0")} QUESTS`;
-}
-
-renderQuests();
-
-$$("#quest-filters button").forEach(button => {
-  button.addEventListener("click", () => {
-    $$("#quest-filters button").forEach(b => b.classList.toggle("active", b === button));
-    renderQuests(button.dataset.filter);
-  });
-});
-
-questList.addEventListener("click", event => {
-  const card = event.target.closest(".quest-card");
-  const quest = card && quests.find(q => q.id === card.dataset.quest);
-  if (!quest) return;
-
-  openDetail(quest.title, questEyebrow(quest), `
-    <div class="modal-content-copy">
-      <p><strong>Mission:</strong> ${quest.mission}</p>
-      <p><strong>${quest.systemsLabel || "Battle systems"}:</strong></p>
-      <ul class="modal-list">
-        ${quest.systems.map(item => `<li>${item}</li>`).join("")}
-      </ul>
-      <p><strong>Stack:</strong> ${quest.tags.join(" · ")}</p>
-      <p><strong>Reward:</strong> +${quest.reward} XP</p>
-      ${quest.link ? `<p><a class="btn" href="${quest.link[1]}" target="_blank" rel="noopener">${quest.link[0]}</a></p>` : ""}
-    </div>
-  `);
-});
-
-$("#modal-close").addEventListener("click", () => modal.close());
-
-modal.addEventListener("click", event => {
-  if (event.target === modal) modal.close();
-});
-
 /* ---------------------------------------------------------
-   SKILLS
+   SKILLS & INVENTORY
 --------------------------------------------------------- */
 
-const skillInfo = {
+export const skillInfo = {
   PHP: ["PHP", "Core backend language", "LVL 95", "PHP 8.x across Drupal, WordPress and custom backend systems, up to PHP 8.4."],
   Drupal: ["Drupal", "CMS / Application Framework", "LVL 93", "9 years with Drupal 6 through 11: custom modules, themes, migrations, upgrades, APIs and commerce."],
   CiviCRM: ["CiviCRM", "CRM", "LVL 80", "Tender management and event sites built on Drupal 7 + CiviCRM."],
@@ -452,51 +316,68 @@ const skillInfo = {
   n8n: ["n8n", "Automation", "LVL 70", "Workflow automation, e.g. syncing GitLab issue boards with Trello."]
 };
 
-$$(".skill-node").forEach(node => {
-  node.addEventListener("click", () => {
-    const data = skillInfo[node.dataset.skill];
-    if (!data) return;
-    openDetail(data[0], data[1], `
-      <div class="modal-content-copy">
-        <p><strong>${data[1]}</strong></p>
-        <p>${data[3]}</p>
-        <p><strong>Current level:</strong> ${data[2]}</p>
-      </div>
-    `);
-  });
-});
+/* [skill key, label, level, learning?] */
+export const skillTree = [
+  ["BACKEND", [
+    ["PHP", "PHP 8", 95],
+    ["Drupal", "DRUPAL", 93],
+    ["CiviCRM", "CIVICRM", 80],
+    ["MySQL", "MYSQL", 88],
+    ["API", "REST API", 90]
+  ]],
+  ["FRONTEND", [
+    ["JavaScript", "JAVASCRIPT", 75],
+    ["SASS", "SASS", 75],
+    ["WordPress", "WORDPRESS", 70],
+    ["React", "REACT", 45, true]
+  ]],
+  ["QUALITY", [
+    ["PHPUnit", "PHPUNIT", 85],
+    ["Cypress", "CYPRESS", 80],
+    ["Solr", "SOLR", 80]
+  ]],
+  ["TOOLS", [
+    ["Git", "GIT / CI", 85],
+    ["Docker", "DOCKER", 70],
+    ["Lagoon", "LAGOON", 65],
+    ["n8n", "N8N", 70]
+  ]]
+];
 
-/* ---------------------------------------------------------
-   INVENTORY
---------------------------------------------------------- */
-
-$$(".item-card").forEach(item => {
-  item.addEventListener("click", () => {
-    const data = skillInfo[item.dataset.item];
-    if (!data) {
-      openDetail(item.dataset.item, "EQUIPMENT", `
-        <div class="modal-content-copy">
-          <p>Custom development equipment / capability used in project work.</p>
-        </div>
-      `);
-      return;
-    }
-
-    openDetail(data[0], "EQUIPPED TECHNOLOGY", `
-      <div class="modal-content-copy">
-        <p><strong>${data[1]}</strong></p>
-        <p>${data[3]}</p>
-        <p><strong>Level:</strong> ${data[2]}</p>
-      </div>
-    `);
-  });
-});
+/* [skill key, icon, label, level] */
+export const inventory = [
+  ["PHP", "PHP", "PHP 8", 95],
+  ["Drupal", "DRP", "DRUPAL", 93],
+  ["API", "API", "REST API", 90],
+  ["MySQL", "SQL", "MYSQL", 88],
+  ["PHPUnit", "PU", "PHPUNIT", 85],
+  ["Git", "GIT", "GIT / CI", 85],
+  ["Stripe", "$", "COMMERCE", 85],
+  ["CiviCRM", "CRM", "CIVICRM", 80],
+  ["Solr", "SLR", "SOLR", 80],
+  ["Cypress", "CY", "CYPRESS", 80],
+  ["JavaScript", "JS", "JAVASCRIPT", 75],
+  ["SASS", "CSS", "SASS", 75],
+  ["Docker", "D", "DOCKER", 70],
+  ["n8n", "N8N", "N8N", 70],
+  ["WordPress", "WP", "WORDPRESS", 70],
+  ["React", "R", "REACT", 45]
+];
 
 /* ---------------------------------------------------------
    WORLD MAP
 --------------------------------------------------------- */
 
-const locations = {
+/* [location key, css class, years, name, role] */
+export const mapNodes = [
+  ["academy", "origin", "2013–2016", "ACADEMY", "BCA / MCA"],
+  ["softtech", "php", "2015–2016", "SOFTTECH", "PHP DEVELOPER"],
+  ["addweb", "drupal", "2016–2019", "ADDWEB", "SOFTWARE ENGINEER"],
+  ["qed42", "api", "2019–2022", "QED42", "SENIOR DRUPAL DEV"],
+  ["codecandy", "current", "2022–NOW", "CODECANDY", "FULL STACK DEV"]
+];
+
+export const locations = {
   academy: ["ACADEMY", "EDUCATION / 2013–2016", "The starting chapter: learning the foundations of programming and information technology.", [
     "Bachelor of Computer Application, IT — D.R. B.R. Ambedkar Govt. College, Sri Ganganagar, RJ (2013)",
     "Master of Computer Application, IT — L J Institute of Management Studies, Ahmedabad, GJ (2016)"
@@ -532,71 +413,26 @@ const locations = {
   ]]
 };
 
-$$(".map-node").forEach(node => {
-  node.addEventListener("click", () => {
-    const location = locations[node.dataset.location];
-    if (!location) return;
-
-    openDetail(location[0], location[1], `
-      <div class="modal-content-copy">
-        <p>${location[2]}</p>
-        <ul class="modal-list">
-          ${location[3].map(item => `<li>${item}</li>`).join("")}
-        </ul>
-      </div>
-    `);
-  });
-});
-
 /* ---------------------------------------------------------
-   GENERIC DETAIL MODAL
+   ACHIEVEMENTS & CONTACT
 --------------------------------------------------------- */
 
-function openDetail(title, eyebrow, body) {
-  modalEyebrow.textContent = eyebrow;
-  modalTitle.textContent = title;
-  modalBody.innerHTML = body;
-  modal.showModal();
-}
+/* [unlocked?, label, title, description] */
+export const achievements = [
+  [true, "UNLOCKED / JULY 2021", "ACQUIA CERTIFIED", "Acquia Certified Drupal Backend Specialist — Drupal 9."],
+  [true, "UNLOCKED", "OPEN SOURCE CONTRIBUTOR", "Contributed code and patches back to the Drupal.org community."],
+  [true, "UNLOCKED", "LEGACY SURVIVOR", "Migrated and upgraded sites all the way from Drupal 6 to Drupal 11."],
+  [true, "UNLOCKED", "API MASTER", "Built REST and JSON:API endpoints, OAuth flows and QuickBooks / Zoho integrations."],
+  [true, "UNLOCKED", "TEST GUARDIAN", "Wrote PHPUnit kernel tests and Cypress end-to-end suites for Drupal workflows."],
+  [true, "UNLOCKED", "PAYMENT PALADIN", "Integrated Stripe, PayPal and GlobalOne payments plus recurring subscriptions."],
+  [false, "LOCKED", "REACT MASTER", "Achievement currently being unlocked."],
+  [false, "LOCKED", "FINAL BOSS", "There is always another problem to solve."]
+];
 
-/* ---------------------------------------------------------
-   TOAST
---------------------------------------------------------- */
+export const contactLinks = [
+  ["GITHUB", "https://github.com/msuthars"],
+  ["LINKEDIN", "https://www.linkedin.com/in/msuthars/"],
+  ["DRUPAL.ORG", "https://www.drupal.org/u/msuthars"]
+];
 
-let toastTimer;
-
-function showToast(message) {
-  toast.textContent = message;
-  toast.classList.add("show");
-
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => {
-    toast.classList.remove("show");
-  }, 1800);
-}
-
-/* ---------------------------------------------------------
-   DYNAMIC YEAR
---------------------------------------------------------- */
-
-$("#year").textContent = new Date().getFullYear();
-
-/* ---------------------------------------------------------
-   SUBTLE POINTER GLOW
---------------------------------------------------------- */
-
-const root = document.documentElement;
-
-document.addEventListener("pointermove", event => {
-  root.style.setProperty("--mouse-x", `${event.clientX}px`);
-  root.style.setProperty("--mouse-y", `${event.clientY}px`);
-});
-
-/* ---------------------------------------------------------
-   IMAGE-FREE AVATAR FALLBACK
-   Replace .avatar-large content with an image later.
---------------------------------------------------------- */
-
-document.addEventListener("DOMContentLoaded", () => {
-  showToast("SYSTEM READY");
-});
+export const email = "msuthar1994@gmail.com";
