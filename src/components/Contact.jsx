@@ -1,4 +1,4 @@
-import { contactLinks, email } from "../data.js";
+import { contactLinks, email, resume } from "../data.js";
 import { sectionClass } from "./SectionHeading.jsx";
 
 export default function Contact({ active }) {
@@ -12,6 +12,8 @@ export default function Contact({ active }) {
           {contactLinks.map(([label, href]) => (
             <a key={label} className="btn" href={href} target="_blank" rel="noopener">{label}</a>
           ))}
+          <a className="btn" href={resume.page} target="_blank" rel="noopener">VIEW RESUME</a>
+          <a className="btn" href={resume.pdf} download>DOWNLOAD PDF</a>
           <a className="btn btn-primary" href={`mailto:${email}`}>SEND MESSAGE</a>
         </div>
       </div>

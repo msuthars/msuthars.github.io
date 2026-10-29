@@ -1,4 +1,4 @@
-import { sections } from "../data.js";
+import { resume, sections } from "../data.js";
 
 export default function Sidebar({ active, onSelect }) {
   return (
@@ -15,6 +15,9 @@ export default function Sidebar({ active, onSelect }) {
             <span className="nav-key">{String(index + 1).padStart(2, "0")}</span><span>{label}</span>
           </button>
         ))}
+        <a className="nav-item" href={resume.page} target="_blank" rel="noopener">
+          <span className="nav-key">CV</span><span>RESUME ↗</span>
+        </a>
       </nav>
 
       <div className="sidebar-bottom">

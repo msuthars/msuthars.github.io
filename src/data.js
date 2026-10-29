@@ -436,3 +436,8 @@ export const contactLinks = [
 ];
 
 export const email = "msuthar1994@gmail.com";
+
+export const resume = {
+  page: `${import.meta.env.BASE_URL}resume/`,
+  pdf: `${import.meta.env.BASE_URL}resume/Manish_Kumar_Resume.pdf`
+};

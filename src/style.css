@@ -147,6 +147,17 @@ button, .nav-item, .quest-card, .skill-node, .item-card, .map-node { -webkit-tap
   border-bottom: 1px solid var(--border);
 }
 
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.topbar-resume {
+  min-height: 34px;
+  padding: 0 13px;
+}
+
 .brand, .top-player, .system-status {
   display: flex;
   align-items: center;
@@ -262,6 +273,7 @@ button, .nav-item, .quest-card, .skill-node, .item-card, .map-node { -webkit-tap
   padding: 12px 13px;
   border-radius: 8px;
   color: var(--muted);
+  text-decoration: none;
   cursor: pointer;
   text-align: left;
   font: 10px var(--mono);
@@ -1163,6 +1175,7 @@ dialog::backdrop {
   .topbar { padding: 0 16px; }
   .top-player { display: none; }
   .system-status { font-size: 8px; }
+  .topbar-actions { gap: 12px; }
   .character-grid,
   .stats-grid,
   .achievement-grid { grid-template-columns: 1fr; }

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manish Kumar — Resume</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="global.css">
+  <style id="sections-styles">
+    /* CSS for section section:Resume */
+    #section-resume {
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .resume-container {
+      width: 100%;
+      max-width: 800px;
+      background-color: #ffffff;
+      box-shadow: 0px 0px 10px 0px rgba(88, 88, 95, 0.12);
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 28.5%;
+      background-color: #404040;
+      color: #ffffff;
+      padding: 50px 20px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .profile-pic-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .profile-pic {
+      width: 103px;
+      height: 103px;
+      border-radius: 50%;
+      border: 1px solid #ffffff;
+      object-fit: cover;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .contact-icon {
+      width: 14px;
+      height: 14px;
+    }
+
+    .sidebar-section {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      border-top: 1px solid #ffffff;
+      padding-top: 20px;
+    }
+
+    .sidebar-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .sidebar-content {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .sidebar-list {
+      list-style-type: disc;
+      padding-left: 20px;
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .sidebar-list a {
+      color: #ffffff;
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    .sidebar-list a:hover {
+      text-decoration: underline;
+    }
+
+    .education-item {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .education-item p {
+      margin: 0;
+    }
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main-header {
+      background-color: rgba(1, 107, 93, 0.4);
+      height: 106px;
+      display: flex;
+      align-items: center;
+      padding: 0 30px;
+    }
+
+    .name {
+      font-size: 26px;
+      font-weight: 700;
+      margin: 0;
+      color: #000000;
+      letter-spacing: 1px;
+    }
+
+    .content-body {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .main-section {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      border-top: 1px solid #000000;
+      padding-top: 20px;
+    }
+
+    .section-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin: 0;
+      color: #000000;
+      text-transform: uppercase;
+    }
+
+    .main-list {
+      list-style-type: disc;
+      padding-left: 20px;
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #000000;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .skills-grid {
+      display: flex;
+      gap: 60px;
+    }
+
+    .job {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .job:last-child {
+      margin-bottom: 0;
+    }
+
+    .job-header {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .job-date {
+      font-size: 13px;
+      color: #000000;
+    }
+
+    .job-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin: 0;
+      color: #000000;
+    }
+
+    .main-text {
+      font-size: 13px;
+      margin: 0;
+      color: #000000;
+      line-height: 1.5;
+    }
+
+    .other-subsection {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .subsection-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin: 0;
+      color: #000000;
+    }
+
+    @media screen and (max-width: 768px) {
+      .resume-container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        padding: 30px 20px;
+      }
+
+      .main-header {
+        padding: 0 20px;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .content-body {
+        padding: 20px;
+      }
+
+      .skills-grid {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      /* Paint the sidebar column on the page canvas so it continues on every page */
+      html {
+        background: linear-gradient(to right, #ffffff 7.5%, #404040 7.5%, #404040 36%, #ffffff 36%);
+      }
+
+      body {
+        background: transparent;
+      }
+
+      #section-resume {
+        padding: 0;
+      }
+
+      .resume-container {
+        max-width: none;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      /* Repeat the top/bottom padding on every printed page */
+      .content-body {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+      }
+
+      .main-list li,
+      .job-header,
+      .education-item {
+        break-inside: avoid;
+      }
+
+      .section-title,
+      .job-header,
+      .subsection-title {
+        break-after: avoid;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section id="section-resume">
+    <div class="resume-container">
+      <div class="left-sidebar">
+        <header class="main-header"></header>
+      </div>
+      <aside class="sidebar">
+        <div class="profile-pic-container">
+          <img src="images/823209d7d335bb2357ea2600ce15f6cc034703ad.png" alt="Manish Kumar" class="profile-pic">
+        </div>
+
+        <div class="contact-info">
+          <div class="contact-item">
+            <img src="images/1_1166.svg" alt="Email" class="contact-icon">
+            <span>msuthar1994@gmail.com</span>
+          </div>
+          <div class="contact-item">
+            <img src="images/1_1174.svg" alt="Phone" class="contact-icon">
+            <span>971 425 2006</span>
+          </div>
+          <div class="contact-item">
+            <img src="images/1_1180.svg" alt="Location" class="contact-icon">
+            <span>India</span>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">PORTFOLIO</h3>
+          <div class="sidebar-content">
+            <ul class="sidebar-list">
+              <li><a href="https://msuthars.github.io/" target="_blank"
+                  rel="noopener noreferrer">https://msuthars.github.io/</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">DRUPAL PROFILE</h3>
+          <div class="sidebar-content">
+            <ul class="sidebar-list">
+              <li><a href="https://www.drupal.org/u/msuthars" target="_blank"
+                  rel="noopener noreferrer">https://www.drupal.org/u/msuthars</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">EDUCATION</h3>
+          <div class="sidebar-content">
+            <div class="education-item">
+              <p class="degree">Master of Computer Application, Information Technology</p>
+              <p class="institution">L J Institute of Management Studies, Ahmedabad, GJ</p>
+              <p class="year">2016</p>
+            </div>
+            <div class="education-item">
+              <p class="degree">Bachelor of Computer Application, Information Technology</p>
+              <p class="institution">D.R. B.R. Ambedkar Govt. College, Sri. Ganganagar, RJ</p>
+              <p class="year">2013</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="main-header">
+          <h1 class="name">MANISH KUMAR</h1>
+        </header>
+
+        <div class="content-body">
+          <div class="main-section">
+            <h2 class="section-title">PROFESSIONAL SUMMARY</h2>
+            <ul class="main-list">
+              <li>Web developer with 11 years of experience, 9 of them spent working with Drupal, from Drupal 6
+                migrations through to Drupal 11.</li>
+              <li>Most of my recent work is on long-running client platforms: a document management system for a bank,
+                a genetic diagnostics reporting tool, an environmental credits platform and CiviCRM-based tender and
+                event sites. I build custom modules, APIs and payment flows, and I've taken several large sites through
+                major version upgrades.</li>
+              <li>I care about code that the next developer can pick up easily, so I write tests (PHPUnit, Cypress),
+                tidy up legacy code as I go and contribute fixes back to Drupal.org.</li>
+            </ul>
+          </div>
+
+          <div class="main-section">
+            <h2 class="section-title">SKILLS</h2>
+            <div class="skills-grid">
+              <ul class="main-list">
+                <li>PHP (8.x)</li>
+                <li>Drupal (7, 8, 9, 10 &amp; 11)</li>
+                <li>Drupal Upgrades &amp; Migrations</li>
+                <li>Drupal Commerce &amp; Stripe</li>
+                <li>CiviCRM</li>
+                <li>WordPress</li>
+                <li>REST / JSON:API / OAuth</li>
+                <li>React (basic)</li>
+              </ul>
+              <ul class="main-list">
+                <li>PHPUnit &amp; Cypress</li>
+                <li>Apache Solr / Search API</li>
+                <li>MySQL / MariaDB &amp; Redis</li>
+                <li>HTML/CSS/JavaScript, jQuery</li>
+                <li>SASS &amp; Bootstrap</li>
+                <li>Docker, DDEV &amp; Lagoon</li>
+                <li>Git (GitHub/GitLab) &amp; CI/CD</li>
+                <li>n8n Automation</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="main-section">
+            <h2 class="section-title">WORK HISTORY</h2>
+
+            <div class="job">
+              <div class="job-header">
+                <span class="job-date">July 2022 - Current</span>
+                <h3 class="job-title">CodeCandy - Full Stack Developer, Remote (outsourced to Bright Solutions, Germany)
+                </h3>
+              </div>
+              <ul class="main-list">
+                <li>Developed and integrated RESTful APIs (JSON), including custom REST endpoints in Drupal.</li>
+                <li>Authored and maintained Kernel tests to ensure robust backend functionality in Drupal.</li>
+                <li>Built and executed Cypress end-to-end tests to validate Drupal workflows and UI interactions.</li>
+                <li>Performed Drupal core upgrades across major versions (8 → 9 → 10), ensuring compatibility and
+                  stability.</li>
+                <li>Created custom modules and themes tailored to specific project requirements.</li>
+                <li>Developed an n8n automation workflow to synchronize GitLab issue boards with Trello, streamlining
+                  task management across platforms.</li>
+                <li>Configured Apache Solr with multiple collections and integrated it with Drupal for advanced search
+                  functionality.</li>
+                <li>Designed intuitive graphical user interfaces, leveraging expertise in serial communication protocols
+                  and database structures to enhance User experience.</li>
+                <li>Refactored and modularized legacy codebase to align with modern development practices, improving
+                  maintainability and performance.</li>
+              </ul>
+              <h4 class="subsection-title">Key Projects</h4>
+              <ul class="main-list">
+                <li><strong>Banking Document Management (Drupal 11):</strong> Book/template sync and publishing,
+                  LDAP, PDF output and PHPUnit kernel tests.</li>
+                <li><strong>Genetic Diagnostics Reporting:</strong> Upgraded from Drupal 8 to 11 (PHP 8.4), Solr search
+                  and JSON:API fixes.</li>
+                <li><strong>Environmental Credits Platform (Drupal 10):</strong> Stripe payments, recurring
+                  subscriptions and REST APIs.</li>
+                <li><strong>Tender Management Portal (Drupal 7 + CiviCRM):</strong> Supplier risk register, tender audit
+                  and award workflows.</li>
+                <li><strong>Event &amp; Conference Sites (Drupal 7 + CiviCRM):</strong> Presenter listings, abstract
+                  submissions and edit locking.</li>
+              </ul>
+            </div>
+
+            <div class="job">
+              <div class="job-header">
+                <span class="job-date">June 2019 - July 2022</span>
+                <h3 class="job-title">QED42 - Senior Drupal Developer, Pune, India</h3>
+              </div>
+              <ul class="main-list">
+                <li>Maintained site configuration integrity and stability through proactive debugging and issue
+                  resolution.</li>
+                <li>Optimized site performance by leveraging Drupal aggregation and caching strategies.</li>
+                <li>Developed custom modules and themes to extend site functionality and meet project-specific needs.
+                </li>
+                <li>Migrated content and functionality from Drupal 7 to Drupal 8, ensuring data consistency and feature
+                  parity.</li>
+                <li>Upgraded Drupal core from version 8 to 9, addressing compatibility and deprecation issues.</li>
+                <li>Integrated third-party APIs to enhance site capabilities and external service connectivity.</li>
+                <li>Managed multi-site architecture using Acquia Cloud Site Factory, supporting scalable enterprise
+                  deployments.</li>
+                <li>Configured and synchronized Acquia Content Hub across multiple sites to enable centralized content
+                  distribution.</li>
+                <li>Contributed code and patches to the Drupal.org community, supporting open-source development
+                  efforts.</li>
+              </ul>
+            </div>
+
+            <div class="job">
+              <div class="job-header">
+                <span class="job-date">June 2016 - June 2019</span>
+                <h3 class="job-title">AddWeb Solution - Software Engineer, Ahmedabad, India</h3>
+              </div>
+              <ul class="main-list">
+                <li>Managed upgrade projects for clients transitioning from Drupal 7 to Drupal 8, ensuring smooth
+                  migrations and minimal downtime.</li>
+                <li>Assisted in the development of custom Drupal modules and themes to deliver tailored functionality
+                  and design.</li>
+                <li>Engineered new capabilities and features to enhance existing websites and meet evolving client
+                  requirements.</li>
+                <li>Configured Drupal sites to align with specific customer needs, optimizing usability and performance.
+                </li>
+                <li>Delivered full-stack Drupal development, including both front-end theming and back-end
+                  implementation.</li>
+                <li>Implemented and customized Drupal Commerce integration, including Stripe, GlobalOne Payment, and
+                  PayPal default plugins.</li>
+                <li>Worked extensively with APIs—integrated OAuth, built custom APIs, and leveraged Drupal Views for
+                  RESTful output.</li>
+                <li>Executed complex data migrations using default and custom plugins, including migrations from Drupal
+                  6 to 8 and Feeds module integration.</li>
+                <li>Integrated invoice listings with third-party systems such as QuickBooks and Zoho for seamless
+                  financial data management.</li>
+              </ul>
+            </div>
+
+            <div class="job">
+              <div class="job-header">
+                <span class="job-date">March 2015 - May 2016</span>
+                <h3 class="job-title">SoftTech Infosys - PHP Developer, Ahmedabad, India</h3>
+              </div>
+              <ul class="main-list">
+                <li>Completed a PHP development internship.</li>
+                <li>Gained hands-on experience with WordPress.</li>
+                <li>Developed custom plugins and themes to extend WordPress functionality and enhance site design.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="main-section">
+            <h2 class="section-title">CERTIFICATIONS</h2>
+            <p class="main-text">Acquia Certified Drupal Backend Specialist - Drupal 9 (July 2021)</p>
+          </div>
+
+          <div class="main-section">
+            <h2 class="section-title">ACTIVITIES</h2>
+            <ul class="main-list">
+              <li>Music</li>
+              <li>Football</li>
+              <li>Gaming</li>
+            </ul>
+          </div>
+
+          <div class="main-section">
+            <h2 class="section-title">OTHER</h2>
+            <div class="other-subsection">
+              <h3 class="subsection-title">Language</h3>
+              <ul class="main-list">
+                <li>English</li>
+                <li>Hindi</li>
+                <li>Gujarati</li>
+                <li>Marwari</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </section>
+</body>
+
+</html>

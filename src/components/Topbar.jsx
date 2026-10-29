@@ -1,3 +1,4 @@
+import { resume } from "../data.js";
 import { avatar } from "./avatar.js";
 
 export default function Topbar() {
@@ -19,9 +20,12 @@ export default function Topbar() {
         </div>
       </div>
 
-      <div className="system-status">
-        <span className="status-dot"></span>
-        <span>ONLINE</span>
+      <div className="topbar-actions">
+        <div className="system-status">
+          <span className="status-dot"></span>
+          <span>ONLINE</span>
+        </div>
+        <a className="btn topbar-resume" href={resume.page} target="_blank" rel="noopener">RESUME ↗</a>
       </div>
     </header>
   );
