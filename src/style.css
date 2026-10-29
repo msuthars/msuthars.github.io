@@ -213,7 +213,8 @@ button, .nav-item, .quest-card, .skill-node, .item-card, .map-node { -webkit-tap
 }
 
 .avatar-large img {
-  height: 158px;
+  height: auto;
+  aspect-ratio: 1;
 }
 
 .mini-avatar, .avatar-large img { border-radius: 50%; }
@@ -438,8 +439,10 @@ h1, h2, p { margin-top: 0; }
 .character-card { overflow: hidden; }
 
 .character-stage {
+  /* Avatar size drives the stage, ring and orbits so they scale together */
+  --avatar: clamp(110px, 34vw, 160px);
   position: relative;
-  min-height: 360px;
+  min-height: calc(var(--avatar) * 2.25);
   display: grid;
   place-items: center;
   overflow: hidden;
@@ -463,8 +466,8 @@ h1, h2, p { margin-top: 0; }
 
 .avatar-large {
   position: relative;
-  width: 160px;
-  height: 160px;
+  width: var(--avatar);
+  height: var(--avatar);
   display: grid;
   place-items: center;
   border: 1px solid rgba(140,255,59,.5);
@@ -478,7 +481,7 @@ h1, h2, p { margin-top: 0; }
 
 .avatar-ring {
   position: absolute;
-  inset: -17px;
+  inset: calc(var(--avatar) * -.11);
   border: 1px dashed rgba(140,255,59,.28);
   border-radius: 50%;
   animation: spin 18s linear infinite;
@@ -492,8 +495,8 @@ h1, h2, p { margin-top: 0; }
   border-radius: 50%;
 }
 
-.orbit-one { width: 290px; height: 110px; transform: rotate(-25deg); }
-.orbit-two { width: 340px; height: 150px; transform: rotate(42deg); }
+.orbit-one { width: calc(var(--avatar) * 1.8); height: calc(var(--avatar) * .7); transform: rotate(-25deg); }
+.orbit-two { width: calc(var(--avatar) * 2.1); height: calc(var(--avatar) * .94); transform: rotate(42deg); }
 
 .character-tag {
   position: absolute;
@@ -1211,8 +1214,7 @@ dialog::backdrop {
   .app-shell { min-height: calc(100vh - 62px); }
   .sidebar { top: 62px; }
   .section-heading h1 { font-size: 34px; }
-  .character-stage { min-height: 280px; }
-  .avatar-large { width: 125px; height: 125px; font-size: 30px; }
+  .avatar-large { font-size: 30px; }
   .profile-grid { grid-template-columns: 1fr; gap: 15px; }
   .inventory-grid { gap: 8px; }
   .item-card { min-height: 130px; }
