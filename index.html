@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manish Kumar — Full Stack Drupal Developer with 11 years of experience. RPG-style portfolio.">
+  <title>MANISH.DEV — Developer RPG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="noise"></div>
+
+  <!-- BOOT -->
+  <div id="boot-screen" class="boot-screen">
+    <div class="boot-inner">
+      <div class="brand-mark">M<span>.</span>D</div>
+      <div class="boot-title">MANISH<span>.DEV</span></div>
+      <div class="boot-subtitle">DEVELOPER RPG / SYSTEM INITIALIZATION</div>
+
+      <div class="boot-log" id="boot-log"></div>
+
+      <div class="boot-progress">
+        <div id="boot-progress-bar"></div>
+      </div>
+
+      <button id="start-game" class="btn btn-primary" disabled>INITIALIZING...</button>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <div id="app" class="app is-hidden">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-icon">M<span>.</span></div>
+        <div>
+          <strong>MANISH.DEV</strong>
+          <small>DEVELOPER RPG</small>
+        </div>
+      </div>
+
+      <div class="top-player">
+        <div class="mini-avatar"><img src="assets/avatar/manish.png" alt=""></div>
+        <div class="top-player-info">
+          <strong>MANISH KUMAR</strong>
+          <span>FULL STACK DEVELOPER</span>
+        </div>
+      </div>
+
+      <div class="system-status">
+        <span class="status-dot"></span>
+        <span>ONLINE</span>
+      </div>
+    </header>
+
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="sidebar-label">NAVIGATION</div>
+
+        <nav id="main-nav">
+          <button class="nav-item active" data-section="character">
+            <span class="nav-key">01</span><span>CHARACTER</span>
+          </button>
+          <button class="nav-item" data-section="quests">
+            <span class="nav-key">02</span><span>QUEST LOG</span>
+          </button>
+          <button class="nav-item" data-section="skills">
+            <span class="nav-key">03</span><span>SKILL TREE</span>
+          </button>
+          <button class="nav-item" data-section="world">
+            <span class="nav-key">04</span><span>WORLD MAP</span>
+          </button>
+          <button class="nav-item" data-section="inventory">
+            <span class="nav-key">05</span><span>INVENTORY</span>
+          </button>
+          <button class="nav-item" data-section="achievements">
+            <span class="nav-key">06</span><span>ACHIEVEMENTS</span>
+          </button>
+          <button class="nav-item" data-section="contact">
+            <span class="nav-key">07</span><span>JOIN PARTY</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="xp-card">
+            <div class="xp-heading"><span>PLAYER LEVEL</span><strong>11</strong></div>
+            <div class="xp-track"><div class="xp-fill" style="width:87%"></div></div>
+            <div class="xp-meta"><span>48,720 XP</span><span>NEXT 50K</span></div>
+          </div>
+
+          <div class="shortcut">
+            <span class="key">ESC</span>
+            <span>MENU</span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="content">
+        <!-- CHARACTER -->
+        <section id="character" class="section active">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">PLAYER PROFILE / 001</span>
+              <h1>CHARACTER</h1>
+              <p>Full stack Drupal developer building long-running client platforms since Drupal 6.</p>
+            </div>
+            <div class="heading-status"><span class="status-dot"></span> ACTIVE PLAYER</div>
+          </div>
+
+          <div class="character-grid">
+            <article class="panel character-card">
+              <div class="character-stage">
+                <div class="scanline"></div>
+                <div class="avatar-large">
+                  <div class="avatar-ring"></div>
+                  <img src="assets/avatar/manish.png" alt="Manish Kumar">
+                </div>
+                <div class="character-orbit orbit-one"></div>
+                <div class="character-orbit orbit-two"></div>
+                <div class="character-tag">PLAYER_001</div>
+              </div>
+              <div class="character-name">
+                <div>
+                  <span class="eyebrow">CLASS</span>
+                  <h2>MANISH KUMAR</h2>
+                </div>
+                <div class="class-badge">FULL STACK<br>DEVELOPER</div>
+              </div>
+            </article>
+
+            <article class="panel profile-card">
+              <div class="panel-title"><span>PLAYER INFORMATION</span><b>01</b></div>
+              <div class="profile-grid">
+                <div><small>EXPERIENCE</small><strong>11 YEARS</strong></div>
+                <div><small>DRUPAL</small><strong>9 YEARS / D6 → D11</strong></div>
+                <div><small>CURRENT GUILD</small><strong>CODECANDY</strong></div>
+                <div><small>LOCATION</small><strong>INDIA / REMOTE</strong></div>
+                <div><small>EDUCATION</small><strong>MCA, 2016</strong></div>
+                <div><small>LANGUAGES</small><strong>EN / HI / GU / MARWARI</strong></div>
+              </div>
+              <div class="divider"></div>
+              <small class="field-label">ABOUT PLAYER</small>
+              <p class="body-copy">
+                Most of my recent work is on long-running client platforms: a document management system
+                for a bank, a genetic diagnostics reporting tool, an environmental credits platform and
+                CiviCRM-based tender and event sites. I build custom modules, APIs and payment flows, and
+                I've taken several large sites through major version upgrades. I care about code the next
+                developer can pick up easily, so I write tests, tidy up legacy code as I go and contribute
+                fixes back to Drupal.org.
+              </p>
+              <div class="quick-tags">
+                <span>PHP 8</span><span>DRUPAL 11</span><span>CIVICRM</span><span>SOLR</span><span>PHPUNIT</span><span>CYPRESS</span><span>DOCKER</span>
+              </div>
+            </article>
+          </div>
+
+          <article class="panel stats-panel">
+            <div class="panel-title"><span>ATTRIBUTES</span><b>CHARACTER STATS</b></div>
+            <div class="stats-grid">
+              <div class="stat" data-value="95"><div class="stat-head"><span>PHP</span><b>95</b></div><div class="stat-track"><i></i></div></div>
+              <div class="stat" data-value="93"><div class="stat-head"><span>DRUPAL</span><b>93</b></div><div class="stat-track"><i></i></div></div>
+              <div class="stat" data-value="90"><div class="stat-head"><span>REST / JSON:API</span><b>90</b></div><div class="stat-track"><i></i></div></div>
+              <div class="stat" data-value="88"><div class="stat-head"><span>MYSQL / MARIADB</span><b>88</b></div><div class="stat-track"><i></i></div></div>
+              <div class="stat" data-value="84"><div class="stat-head"><span>TESTING</span><b>84</b></div><div class="stat-track"><i></i></div></div>
+              <div class="stat" data-value="80"><div class="stat-head"><span>CIVICRM</span><b>80</b></div><div class="stat-track"><i></i></div></div>
+              <div class="stat" data-value="75"><div class="stat-head"><span>JAVASCRIPT</span><b>75</b></div><div class="stat-track"><i></i></div></div>
+              <div class="stat" data-value="45"><div class="stat-head"><span>REACT</span><b>45</b></div><div class="stat-track"><i></i></div></div>
+            </div>
+          </article>
+        </section>
+
+        <!-- QUESTS -->
+        <section id="quests" class="section">
+          <div class="section-heading">
+            <div><span class="eyebrow">MISSIONS / 002</span><h1>QUEST LOG</h1><p>Projects I've worked on, presented as completed and active missions.</p></div>
+            <div class="section-counter" id="quest-counter">00 QUESTS</div>
+          </div>
+
+          <div class="quest-filters" id="quest-filters">
+            <button class="active" data-filter="all">ALL</button>
+            <button data-filter="codecandy">CODECANDY</button>
+            <button data-filter="qed42">QED42</button>
+            <button data-filter="addweb">ADDWEB</button>
+            <button data-filter="softtech">SOFTTECH</button>
+          </div>
+
+          <div class="quest-list" id="quest-list"></div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills" class="section">
+          <div class="section-heading">
+            <div><span class="eyebrow">ABILITY SYSTEM / 003</span><h1>SKILL TREE</h1><p>Unlocked abilities and technologies currently being developed.</p></div>
+          </div>
+
+          <div class="skill-tree">
+            <div class="skill-root">WEB<br>DEVELOPMENT</div>
+            <div class="tree-line vertical"></div>
+            <div class="skill-columns">
+              <div class="skill-branch">
+                <div class="branch-title">BACKEND</div>
+                <div class="tree-line"></div>
+                <button class="skill-node unlocked" data-skill="PHP"><b>PHP 8</b><small>LVL 95</small></button>
+                <button class="skill-node unlocked" data-skill="Drupal"><b>DRUPAL</b><small>LVL 93</small></button>
+                <button class="skill-node unlocked" data-skill="CiviCRM"><b>CIVICRM</b><small>LVL 80</small></button>
+                <button class="skill-node unlocked" data-skill="MySQL"><b>MYSQL</b><small>LVL 88</small></button>
+                <button class="skill-node unlocked" data-skill="API"><b>REST API</b><small>LVL 90</small></button>
+              </div>
+              <div class="skill-branch">
+                <div class="branch-title">FRONTEND</div>
+                <div class="tree-line"></div>
+                <button class="skill-node unlocked" data-skill="JavaScript"><b>JAVASCRIPT</b><small>LVL 75</small></button>
+                <button class="skill-node unlocked" data-skill="SASS"><b>SASS</b><small>LVL 75</small></button>
+                <button class="skill-node unlocked" data-skill="WordPress"><b>WORDPRESS</b><small>LVL 70</small></button>
+                <button class="skill-node learning" data-skill="React"><b>REACT</b><small>LVL 45</small></button>
+              </div>
+              <div class="skill-branch">
+                <div class="branch-title">QUALITY</div>
+                <div class="tree-line"></div>
+                <button class="skill-node unlocked" data-skill="PHPUnit"><b>PHPUNIT</b><small>LVL 85</small></button>
+                <button class="skill-node unlocked" data-skill="Cypress"><b>CYPRESS</b><small>LVL 80</small></button>
+                <button class="skill-node unlocked" data-skill="Solr"><b>SOLR</b><small>LVL 80</small></button>
+              </div>
+              <div class="skill-branch">
+                <div class="branch-title">TOOLS</div>
+                <div class="tree-line"></div>
+                <button class="skill-node unlocked" data-skill="Git"><b>GIT / CI</b><small>LVL 85</small></button>
+                <button class="skill-node unlocked" data-skill="Docker"><b>DOCKER</b><small>LVL 70</small></button>
+                <button class="skill-node unlocked" data-skill="Lagoon"><b>LAGOON</b><small>LVL 65</small></button>
+                <button class="skill-node unlocked" data-skill="n8n"><b>N8N</b><small>LVL 70</small></button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- WORLD -->
+        <section id="world" class="section">
+          <div class="section-heading">
+            <div><span class="eyebrow">CAREER JOURNEY / 004</span><h1>WORLD MAP</h1><p>Explore the major chapters of the developer journey.</p></div>
+          </div>
+
+          <div class="world">
+            <div class="world-grid"></div>
+            <div class="map-route"></div>
+
+            <button class="map-node origin" data-location="academy"><span>2013–2016</span><b>ACADEMY</b><small>BCA / MCA</small></button>
+            <button class="map-node php" data-location="softtech"><span>2015–2016</span><b>SOFTTECH</b><small>PHP DEVELOPER</small></button>
+            <button class="map-node drupal" data-location="addweb"><span>2016–2019</span><b>ADDWEB</b><small>SOFTWARE ENGINEER</small></button>
+            <button class="map-node api" data-location="qed42"><span>2019–2022</span><b>QED42</b><small>SENIOR DRUPAL DEV</small></button>
+            <button class="map-node current" data-location="codecandy"><span>2022–NOW</span><b>CODECANDY</b><small>FULL STACK DEV</small></button>
+
+            <div class="map-coordinates">SECTOR 04 / 27.6N / 73.4E</div>
+          </div>
+        </section>
+
+        <!-- INVENTORY -->
+        <section id="inventory" class="section">
+          <div class="section-heading">
+            <div><span class="eyebrow">EQUIPMENT / 005</span><h1>INVENTORY</h1><p>Technologies equipped for current missions.</p></div>
+          </div>
+
+          <div class="inventory-grid">
+            <button class="item-card" data-item="PHP"><span class="item-icon">PHP</span><b>PHP 8</b><small>LVL 95</small></button>
+            <button class="item-card" data-item="Drupal"><span class="item-icon">DRP</span><b>DRUPAL</b><small>LVL 93</small></button>
+            <button class="item-card" data-item="API"><span class="item-icon">API</span><b>REST API</b><small>LVL 90</small></button>
+            <button class="item-card" data-item="MySQL"><span class="item-icon">SQL</span><b>MYSQL</b><small>LVL 88</small></button>
+            <button class="item-card" data-item="PHPUnit"><span class="item-icon">PU</span><b>PHPUNIT</b><small>LVL 85</small></button>
+            <button class="item-card" data-item="Git"><span class="item-icon">GIT</span><b>GIT / CI</b><small>LVL 85</small></button>
+            <button class="item-card" data-item="Stripe"><span class="item-icon">$</span><b>COMMERCE</b><small>LVL 85</small></button>
+            <button class="item-card" data-item="CiviCRM"><span class="item-icon">CRM</span><b>CIVICRM</b><small>LVL 80</small></button>
+            <button class="item-card" data-item="Solr"><span class="item-icon">SLR</span><b>SOLR</b><small>LVL 80</small></button>
+            <button class="item-card" data-item="Cypress"><span class="item-icon">CY</span><b>CYPRESS</b><small>LVL 80</small></button>
+            <button class="item-card" data-item="JavaScript"><span class="item-icon">JS</span><b>JAVASCRIPT</b><small>LVL 75</small></button>
+            <button class="item-card" data-item="SASS"><span class="item-icon">CSS</span><b>SASS</b><small>LVL 75</small></button>
+            <button class="item-card" data-item="Docker"><span class="item-icon">D</span><b>DOCKER</b><small>LVL 70</small></button>
+            <button class="item-card" data-item="n8n"><span class="item-icon">N8N</span><b>N8N</b><small>LVL 70</small></button>
+            <button class="item-card" data-item="WordPress"><span class="item-icon">WP</span><b>WORDPRESS</b><small>LVL 70</small></button>
+            <button class="item-card" data-item="React"><span class="item-icon">R</span><b>REACT</b><small>LVL 45</small></button>
+          </div>
+        </section>
+
+        <!-- ACHIEVEMENTS -->
+        <section id="achievements" class="section">
+          <div class="section-heading">
+            <div><span class="eyebrow">MILESTONES / 006</span><h1>ACHIEVEMENTS</h1><p>Milestones earned throughout the journey.</p></div>
+          </div>
+
+          <div class="achievement-grid">
+            <article class="achievement unlocked"><div class="achievement-icon">◆</div><div><small>UNLOCKED / JULY 2021</small><h2>ACQUIA CERTIFIED</h2><p>Acquia Certified Drupal Backend Specialist — Drupal 9.</p></div></article>
+            <article class="achievement unlocked"><div class="achievement-icon">◆</div><div><small>UNLOCKED</small><h2>OPEN SOURCE CONTRIBUTOR</h2><p>Contributed code and patches back to the Drupal.org community.</p></div></article>
+            <article class="achievement unlocked"><div class="achievement-icon">◆</div><div><small>UNLOCKED</small><h2>LEGACY SURVIVOR</h2><p>Migrated and upgraded sites all the way from Drupal 6 to Drupal 11.</p></div></article>
+            <article class="achievement unlocked"><div class="achievement-icon">◆</div><div><small>UNLOCKED</small><h2>API MASTER</h2><p>Built REST and JSON:API endpoints, OAuth flows and QuickBooks / Zoho integrations.</p></div></article>
+            <article class="achievement unlocked"><div class="achievement-icon">◆</div><div><small>UNLOCKED</small><h2>TEST GUARDIAN</h2><p>Wrote PHPUnit kernel tests and Cypress end-to-end suites for Drupal workflows.</p></div></article>
+            <article class="achievement unlocked"><div class="achievement-icon">◆</div><div><small>UNLOCKED</small><h2>PAYMENT PALADIN</h2><p>Integrated Stripe, PayPal and GlobalOne payments plus recurring subscriptions.</p></div></article>
+            <article class="achievement locked"><div class="achievement-icon">?</div><div><small>LOCKED</small><h2>REACT MASTER</h2><p>Achievement currently being unlocked.</p></div></article>
+            <article class="achievement locked"><div class="achievement-icon">?</div><div><small>LOCKED</small><h2>FINAL BOSS</h2><p>There is always another problem to solve.</p></div></article>
+          </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="section">
+          <div class="party-screen panel">
+            <span class="eyebrow">FINAL QUEST / 007</span>
+            <h1>JOIN THE PARTY</h1>
+            <p>Have a Drupal project, an upgrade to survive or a technical challenge? Let's build something together.</p>
+            <div class="party-actions">
+              <a class="btn" href="https://github.com/msuthars" target="_blank" rel="noopener">GITHUB</a>
+              <a class="btn" href="https://www.linkedin.com/in/msuthars/" target="_blank" rel="noopener">LINKEDIN</a>
+              <a class="btn" href="https://www.drupal.org/u/msuthars" target="_blank" rel="noopener">DRUPAL.ORG</a>
+              <a class="btn btn-primary" href="mailto:msuthar1994@gmail.com">SEND MESSAGE</a>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer class="footer">
+      <span>MANISH.DEV // PLAYER 001</span>
+      <span>© <span id="year"></span> ALL SYSTEMS OPERATIONAL</span>
+    </footer>
+  </div>
+
+  <!-- MODAL -->
+  <dialog id="detail-modal">
+    <div class="modal-inner">
+      <button id="modal-close" class="modal-close" aria-label="Close">×</button>
+      <span id="modal-eyebrow" class="eyebrow">DETAIL</span>
+      <h2 id="modal-title">TITLE</h2>
+      <div id="modal-body"></div>
+    </div>
+  </dialog>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
