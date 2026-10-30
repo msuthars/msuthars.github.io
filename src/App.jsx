@@ -3,12 +3,15 @@
 ========================================================= */
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { sections } from "./data.js";
+import { questEyebrow, sections } from "./data.js";
 import BootScreen from "./components/BootScreen.jsx";
 import Topbar from "./components/Topbar.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import DetailModal from "./components/DetailModal.jsx";
 import Toast from "./components/Toast.jsx";
+import Terminal from "./components/Terminal.jsx";
+import BugHunter from "./components/BugHunter.jsx";
+import QuestDetail from "./components/QuestDetail.jsx";
 import Character from "./components/Character.jsx";
 import Quests from "./components/Quests.jsx";
 import SkillTree from "./components/SkillTree.jsx";
@@ -47,6 +50,8 @@ export default function App() {
   const [started, setStarted] = useState(() => !isBooting());
   const [active, setActive] = useState(sectionFromHash);
   const [detail, setDetail] = useState(null);
+  const [terminalOpen, setTerminalOpen] = useState(false);
+  const [gameOpen, setGameOpen] = useState(false);
   const [toast, setToast] = useState({ message: "", show: false });
   const toastTimer = useRef();
 
@@ -79,15 +84,25 @@ export default function App() {
     showToast("SYSTEM READY");
   }, [showToast]);
 
-  /* Keyboard shortcuts: 1–7 jump to sections (ESC is handled by <dialog>) */
+  /* Keyboard shortcuts: 1–7 jump to sections, ` or / opens the terminal (ESC is handled by <dialog>) */
   useEffect(() => {
     function onKeyDown(event) {
+      if (!started || isTyping() || terminalOpen || gameOpen || event.metaKey || event.ctrlKey || event.altKey) return;
+      if (event.key === "`" || event.key === "/") {
+        event.preventDefault();
+        setDetail(null);
+        setTerminalOpen(true);
+        return;
+      }
       const section = sections[Number(event.key) - 1];
-      if (started && section && !isTyping()) openSection(section.id);
+      if (section) openSection(section.id);
     }
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [started, openSection]);
+  }, [started, terminalOpen, gameOpen, openSection]);
+
+  const openTerminal = useCallback(() => setTerminalOpen(true), []);
+  const openGame = useCallback(() => setGameOpen(true), []);
 
   /* Subtle pointer glow */
   useEffect(() => {
@@ -117,12 +132,12 @@ export default function App() {
         <Topbar />
 
         <div className="app-shell">
-          <Sidebar active={active} onSelect={openSection} />
+          <Sidebar active={active} onSelect={openSection} onTerminal={openTerminal} />
 
           <main className="content">
             {sections.map(({ id }) => {
               const Section = sectionComponents[id];
-              return <Section key={id} active={active === id} started={started} openDetail={openDetail} />;
+              return <Section key={id} active={active === id} started={started} openDetail={openDetail} onPlay={openGame} />;
             })}
           </main>
         </div>
@@ -134,6 +149,17 @@ export default function App() {
       </div>
 
       <DetailModal detail={detail} onClose={() => setDetail(null)} />
+      <Terminal
+        open={terminalOpen}
+        onClose={() => setTerminalOpen(false)}
+        onGoto={id => { setTerminalOpen(false); openSection(id); }}
+        onOpenQuest={quest => {
+          setTerminalOpen(false);
+          openDetail(quest.title, questEyebrow(quest), <QuestDetail quest={quest} />);
+        }}
+        onPlay={() => { setTerminalOpen(false); setGameOpen(true); }}
+      />
+      <BugHunter open={gameOpen} onClose={() => setGameOpen(false)} />
       <Toast {...toast} />
     </>
   );

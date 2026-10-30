@@ -21,10 +21,10 @@ export default function Topbar() {
       </div>
 
       <div className="topbar-actions">
-        <a className="system-status open-to-work" href="#contact">
+        <div className="system-status">
           <span className="status-dot"></span>
-          <span>OPEN TO WORK</span>
-        </a>
+          <span>ONLINE</span>
+        </div>
         <a className="btn topbar-resume" href={resume.page} target="_blank" rel="noopener">RESUME ↗</a>
       </div>
     </header>

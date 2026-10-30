@@ -1,7 +1,7 @@
 import { contactLinks, email, resume } from "../data.js";
 import { sectionClass } from "./SectionHeading.jsx";
 
-export default function Contact({ active }) {
+export default function Contact({ active, onPlay }) {
   return (
     <section id="contact" className={sectionClass(active)}>
       <div className="party-screen panel">
@@ -16,6 +16,9 @@ export default function Contact({ active }) {
           <a className="btn" href={resume.page} target="_blank" rel="noopener">VIEW RESUME</a>
           <a className="btn btn-primary" href={`mailto:${email}`}>SEND MESSAGE</a>
         </div>
+        <button className="party-game" onClick={onPlay}>
+          <span>🐛</span> BONUS STAGE: <b>PLAY BUG HUNTER</b> →
+        </button>
       </div>
     </section>
   );

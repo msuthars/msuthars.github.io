@@ -447,18 +447,14 @@ h1, h2, p { margin-top: 0; }
 }
 
 .open-to-work {
-  color: var(--accent);
+  color: var(--text);
   text-decoration: none;
+  transition: border-color .2s ease;
 }
 
-.heading-status.open-to-work {
-  border-color: var(--accent-line);
-  background: var(--accent-soft);
-}
+a.open-to-work:hover { border-color: var(--border-strong); }
 
-a.open-to-work:hover { color: var(--text); }
-
-.party-status { margin-bottom: 22px; }
+.heading-status.party-status { align-self: center; margin-bottom: 22px; }
 
 .panel {
   border: 1px solid var(--border);
@@ -1247,7 +1243,6 @@ dialog::backdrop {
 @media (max-width: 460px) {
   .content { padding: 26px 14px 40px; }
   .topbar { height: 62px; }
-  .brand > div:not(.brand-icon) { display: none; }
   .app-shell { min-height: calc(100vh - 62px); }
   .sidebar { top: 62px; }
   .section-heading h1 { font-size: 34px; }
@@ -1258,9 +1253,200 @@ dialog::backdrop {
   .party-screen h1 { letter-spacing: -2px; }
 }
 
+/* TERMINAL */
+
+dialog.terminal {
+  width: min(760px, calc(100% - 24px));
+  overflow: hidden;
+  background: #05070a;
+  border-color: var(--accent-line);
+  box-shadow: 0 30px 100px rgba(0,0,0,.7), 0 0 60px rgba(140,255,59,.08);
+}
+
+.terminal-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 44px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel-solid);
+  color: var(--muted);
+  font: 11px var(--mono);
+}
+
+.terminal-dots { display: flex; gap: 6px; }
+.terminal-dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--muted-2); }
+.terminal-dots i:first-child { background: var(--danger); }
+.terminal-dots i:nth-child(2) { background: var(--warning); }
+.terminal-dots i:last-child { background: var(--accent); }
+
+.terminal-close { top: 6px; right: 8px; }
+
+.terminal-screen {
+  height: min(440px, 62vh);
+  overflow-y: auto;
+  padding: 18px 20px;
+  font: 13px/1.65 var(--mono);
+  cursor: text;
+}
+
+.terminal-line { white-space: pre-wrap; word-break: break-word; color: var(--text); }
+.terminal-line.muted { color: var(--muted); }
+.terminal-line.accent { color: var(--accent); }
+.terminal-line.err { color: var(--danger); }
+.terminal-line.cmd { color: var(--text); margin-top: 8px; }
+.terminal-line a { color: var(--blue); }
+.terminal-prompt { color: var(--accent); }
+
+.terminal-input { display: flex; gap: 10px; margin-top: 8px; }
+
+.terminal-input input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  caret-color: var(--accent);
+  font: inherit;
+}
+
+/* BUG HUNTER */
+
+dialog.bughunter {
+  width: min(880px, calc(100% - 24px));
+  overflow: hidden;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.bh-hud {
+  position: relative;
+  display: flex;
+  gap: 28px;
+  padding: 14px 60px 14px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel-solid);
+}
+
+.bh-hud small { display: block; color: var(--muted-2); font: 10px var(--mono); letter-spacing: 1px; }
+.bh-hud strong { display: block; margin-top: 3px; color: var(--accent); font: 700 18px var(--mono); }
+.bh-hp span { color: var(--danger); margin-right: 2px; }
+.bh-hp span.lost { color: var(--muted-2); }
+.bh-close { top: 50%; transform: translateY(-50%); }
+
+.bh-arena {
+  position: relative;
+  height: min(480px, 62vh);
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px),
+    radial-gradient(circle at center, rgba(140,255,59,.06), transparent 60%),
+    #05070a;
+  background-size: 34px 34px, 34px 34px, auto, auto;
+  cursor: crosshair;
+}
+
+.bh-bug {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  margin: -26px 0 0 -26px;
+  border: 1px solid rgba(255,95,104,.35);
+  border-radius: 50%;
+  background: rgba(255,95,104,.08);
+  font-size: 26px;
+  line-height: 1;
+  cursor: crosshair;
+  animation: bugLife linear forwards;
+}
+
+.bh-bug.golden {
+  border-color: rgba(255,189,74,.7);
+  background: rgba(255,189,74,.15);
+  box-shadow: 0 0 24px rgba(255,189,74,.35);
+}
+
+.bh-bug.golden { animation-name: goldenLife; }
+
+@keyframes goldenLife {
+  0% { transform: scale(.4); opacity: 0; }
+  12% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(.85); }
+}
+
+@keyframes bugLife {
+  0% { transform: scale(.4); opacity: 0; }
+  12% { transform: scale(1); opacity: 1; }
+  80% { transform: scale(1); border-color: rgba(255,95,104,.35); }
+  100% { transform: scale(.85); border-color: var(--danger); box-shadow: 0 0 20px rgba(255,95,104,.5); }
+}
+
+.bh-pop {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  color: var(--accent);
+  font: 700 16px var(--mono);
+  pointer-events: none;
+  animation: popUp .6s ease-out forwards;
+}
+
+@keyframes popUp {
+  to { transform: translate(-50%, -150%); opacity: 0; }
+}
+
+.bh-screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  background: rgba(5,7,10,.72);
+  cursor: default;
+}
+
+.bh-screen h2 { margin: 10px 0 14px; font-size: clamp(30px, 6vw, 46px); letter-spacing: -1px; }
+.bh-screen p { max-width: 460px; margin: 0 0 24px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+.bh-result strong { color: var(--accent); font-size: 22px; }
+.bh-record { display: block; margin-top: 6px; color: var(--warning); font: 700 12px var(--mono); letter-spacing: 1px; }
+.bh-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+
+.party-game {
+  margin-top: 26px;
+  padding: 10px 16px;
+  border: 1px dashed var(--accent-line);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  font: 11px var(--mono);
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.party-game b { color: var(--accent); font-weight: 700; }
+.party-game:hover { color: var(--text); border-style: solid; background: var(--accent-soft); }
+
+@media (max-width: 720px) {
+  .bh-hud { gap: 16px; padding: 12px 52px 12px 14px; }
+  .bh-hud strong { font-size: 15px; }
+  .terminal-screen { font-size: 12px; padding: 14px; }
+}
+
+@media (max-width: 360px) {
+  .system-status { display: none; }
+}
+
 /* REDUCED MOTION */
 
 @media (prefers-reduced-motion: reduce) {
+  .bh-bug { animation: none; }
   *, *::before, *::after {
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
