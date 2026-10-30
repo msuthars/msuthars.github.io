@@ -27,14 +27,25 @@ const sectionComponents = {
   contact: Contact
 };
 
+/* The inline script in index.html adds .is-booting on a first visit (and not for reduced motion) */
+function isBooting() {
+  return typeof document !== "undefined" && document.documentElement.classList.contains("is-booting");
+}
+
+function sectionFromHash() {
+  if (typeof window === "undefined") return "character";
+  const id = window.location.hash.slice(1);
+  return sections.some(section => section.id === id) ? id : "character";
+}
+
 function isTyping() {
   const tag = document.activeElement?.tagName?.toLowerCase();
   return tag === "input" || tag === "textarea";
 }
 
 export default function App() {
-  const [started, setStarted] = useState(false);
-  const [active, setActive] = useState("character");
+  const [started, setStarted] = useState(() => !isBooting());
+  const [active, setActive] = useState(sectionFromHash);
   const [detail, setDetail] = useState(null);
   const [toast, setToast] = useState({ message: "", show: false });
   const toastTimer = useRef();
@@ -47,9 +58,17 @@ export default function App() {
     }, 1800);
   }, []);
 
+  /* Each section has its own URL (#quests, #skills…) so it can be linked to */
   const openSection = useCallback(id => {
+    if (window.location.hash !== `#${id}`) history.pushState(null, "", `#${id}`);
     setActive(id);
     window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
+    const onPopState = () => setActive(sectionFromHash());
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
   }, []);
 
   const openDetail = useCallback((title, eyebrow, body) => {
@@ -64,11 +83,11 @@ export default function App() {
   useEffect(() => {
     function onKeyDown(event) {
       const section = sections[Number(event.key) - 1];
-      if (section && !isTyping()) openSection(section.id);
+      if (started && section && !isTyping()) openSection(section.id);
     }
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [openSection]);
+  }, [started, openSection]);
 
   /* Subtle pointer glow */
   useEffect(() => {
@@ -82,6 +101,8 @@ export default function App() {
   }, []);
 
   function handleStart() {
+    document.documentElement.classList.remove("is-booting");
+    try { localStorage.setItem("booted", "1"); } catch (e) { /* storage blocked: boot again next time */ }
     setStarted(true);
     showToast("PLAYER INITIALIZED");
   }
@@ -92,27 +113,25 @@ export default function App() {
 
       {!started && <BootScreen onStart={handleStart} />}
 
-      {started && (
-        <div id="app" className="app">
-          <Topbar />
+      <div id="app" className="app">
+        <Topbar />
 
-          <div className="app-shell">
-            <Sidebar active={active} onSelect={openSection} />
+        <div className="app-shell">
+          <Sidebar active={active} onSelect={openSection} />
 
-            <main className="content">
-              {sections.map(({ id }) => {
-                const Section = sectionComponents[id];
-                return <Section key={id} active={active === id} openDetail={openDetail} />;
-              })}
-            </main>
-          </div>
-
-          <footer className="footer">
-            <span>MANISH.DEV // PLAYER 001</span>
-            <span>© {new Date().getFullYear()} ALL SYSTEMS OPERATIONAL</span>
-          </footer>
+          <main className="content">
+            {sections.map(({ id }) => {
+              const Section = sectionComponents[id];
+              return <Section key={id} active={active === id} started={started} openDetail={openDetail} />;
+            })}
+          </main>
         </div>
-      )}
+
+        <footer className="footer">
+          <span>MANISH.DEV // PLAYER 001</span>
+          <span>© {new Date().getFullYear()} ALL SYSTEMS OPERATIONAL</span>
+        </footer>
+      </div>
 
       <DetailModal detail={detail} onClose={() => setDetail(null)} />
       <Toast {...toast} />

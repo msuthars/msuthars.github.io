@@ -28,8 +28,8 @@ export default function Sidebar({ active, onSelect }) {
         </div>
 
         <div className="shortcut">
-          <span className="key">ESC</span>
-          <span>MENU</span>
+          <span className="key">1–7</span>
+          <span>QUICK TRAVEL</span>
         </div>
       </div>
     </aside>

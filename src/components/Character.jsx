@@ -3,13 +3,15 @@ import { profile, quickTags, stats } from "../data.js";
 import { avatar } from "./avatar.js";
 import SectionHeading, { sectionClass } from "./SectionHeading.jsx";
 
-function Stat({ label, value, index }) {
+function Stat({ label, value, index, started }) {
   const [width, setWidth] = useState(0);
 
+  /* Bars fill once the game has started (they're hidden behind the boot screen until then) */
   useEffect(() => {
+    if (!started) return;
     const timer = setTimeout(() => setWidth(value), 120 + index * 80);
     return () => clearTimeout(timer);
-  }, [value, index]);
+  }, [value, index, started]);
 
   return (
     <div className="stat">
@@ -21,7 +23,7 @@ function Stat({ label, value, index }) {
   );
 }
 
-export default function Character({ active }) {
+export default function Character({ active, started }) {
   return (
     <section id="character" className={sectionClass(active)}>
       <SectionHeading
@@ -80,7 +82,7 @@ export default function Character({ active }) {
         <div className="panel-title"><span>ATTRIBUTES</span><b>CHARACTER STATS</b></div>
         <div className="stats-grid">
           {stats.map(([label, value], index) => (
-            <Stat key={label} label={label} value={value} index={index} />
+            <Stat key={label} label={label} value={value} index={index} started={started} />
           ))}
         </div>
       </article>

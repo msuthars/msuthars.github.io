@@ -54,6 +54,25 @@ button, .nav-item, .quest-card, .skill-node, .item-card, .map-node { -webkit-tap
 }
 
 .is-hidden { display: none !important; }
+.is-booting #root > .app { visibility: hidden; }
+
+/* Visible keyboard focus */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.boot-skip {
+  margin-top: 14px;
+  background: none;
+  border: 0;
+  color: var(--muted);
+  font: 10px var(--mono);
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.boot-skip:hover { color: var(--accent); }
 
 /* BOOT */
 
@@ -94,7 +113,7 @@ button, .nav-item, .quest-card, .skill-node, .item-card, .map-node { -webkit-tap
 .boot-subtitle {
   margin-top: 8px;
   color: var(--muted);
-  font: 10px var(--mono);
+  font: 11px var(--mono);
   letter-spacing: 1.5px;
 }
 
@@ -193,7 +212,7 @@ button, .nav-item, .quest-card, .skill-node, .item-card, .map-node { -webkit-tap
   display: block;
   margin-top: 3px;
   color: var(--muted);
-  font: 8px var(--mono);
+  font: 11px var(--mono);
   letter-spacing: 1px;
 }
 
@@ -202,7 +221,7 @@ button, .nav-item, .quest-card, .skill-node, .item-card, .map-node { -webkit-tap
 .mini-avatar {
   width: 34px;
   height: 34px;
-  font-size: 9px;
+  font-size: 11px;
   overflow: hidden;
 }
 
@@ -222,7 +241,7 @@ button, .nav-item, .quest-card, .skill-node, .item-card, .map-node { -webkit-tap
 .system-status {
   gap: 8px;
   color: var(--muted);
-  font: 9px var(--mono);
+  font: 11px var(--mono);
   letter-spacing: 1px;
 }
 
@@ -255,7 +274,7 @@ button, .nav-item, .quest-card, .skill-node, .item-card, .map-node { -webkit-tap
 .sidebar-label {
   padding: 0 13px 12px;
   color: var(--muted-2);
-  font: 9px var(--mono);
+  font: 11px var(--mono);
   letter-spacing: 1.5px;
 }
 
@@ -277,7 +296,7 @@ button, .nav-item, .quest-card, .skill-node, .item-card, .map-node { -webkit-tap
   text-decoration: none;
   cursor: pointer;
   text-align: left;
-  font: 10px var(--mono);
+  font: 11px var(--mono);
   letter-spacing: .5px;
   transition: .2s ease;
 }
@@ -296,7 +315,7 @@ button, .nav-item, .quest-card, .skill-node, .item-card, .map-node { -webkit-tap
 .nav-key {
   width: 22px;
   color: var(--muted-2);
-  font-size: 8px;
+  font-size: 11px;
 }
 
 .nav-item.active .nav-key { color: var(--accent); }
@@ -317,7 +336,7 @@ button, .nav-item, .quest-card, .skill-node, .item-card, .map-node { -webkit-tap
 }
 
 .xp-heading {
-  font: 8px var(--mono);
+  font: 11px var(--mono);
   color: var(--muted);
 }
 
@@ -341,7 +360,7 @@ button, .nav-item, .quest-card, .skill-node, .item-card, .map-node { -webkit-tap
 }
 
 .xp-meta {
-  font: 7px var(--mono);
+  font: 11px var(--mono);
   color: var(--muted-2);
 }
 
@@ -352,7 +371,7 @@ button, .nav-item, .quest-card, .skill-node, .item-card, .map-node { -webkit-tap
   margin-top: 14px;
   padding: 0 4px;
   color: var(--muted-2);
-  font: 8px var(--mono);
+  font: 11px var(--mono);
 }
 
 .key {
@@ -371,6 +390,8 @@ button, .nav-item, .quest-card, .skill-node, .item-card, .map-node { -webkit-tap
 }
 
 .section { display: none; animation: sectionIn .35s ease both; }
+/* Deep links (#quests…) should open at the top, not scroll the heading under the sticky bars */
+.section { scroll-margin-top: 100vh; }
 .section.active { display: block; }
 
 @keyframes sectionIn {
@@ -388,7 +409,7 @@ button, .nav-item, .quest-card, .skill-node, .item-card, .map-node { -webkit-tap
 
 .eyebrow {
   color: var(--accent);
-  font: 9px var(--mono);
+  font: 11px var(--mono);
   letter-spacing: 1.5px;
 }
 
@@ -414,7 +435,7 @@ h1, h2, p { margin-top: 0; }
   padding: 9px 11px;
   border: 1px solid var(--border);
   color: var(--muted);
-  font: 8px var(--mono);
+  font: 11px var(--mono);
 }
 
 .heading-status {
@@ -503,7 +524,7 @@ h1, h2, p { margin-top: 0; }
   bottom: 16px;
   left: 16px;
   color: var(--muted-2);
-  font: 8px var(--mono);
+  font: 11px var(--mono);
 }
 
 .character-name {
@@ -528,7 +549,7 @@ h1, h2, p { margin-top: 0; }
   border: 1px solid var(--accent-line);
   color: var(--accent);
   text-align: right;
-  font: 8px/1.5 var(--mono);
+  font: 11px/1.5 var(--mono);
 }
 
 .profile-card { padding: 22px; }
@@ -539,7 +560,7 @@ h1, h2, p { margin-top: 0; }
   padding-bottom: 16px;
   border-bottom: 1px solid var(--border);
   color: var(--muted);
-  font: 9px var(--mono);
+  font: 11px var(--mono);
   letter-spacing: 1px;
 }
 
@@ -556,7 +577,7 @@ h1, h2, p { margin-top: 0; }
   display: block;
   margin-bottom: 7px;
   color: var(--muted-2);
-  font: 8px var(--mono);
+  font: 11px var(--mono);
 }
 
 .profile-grid strong {
@@ -583,7 +604,7 @@ h1, h2, p { margin-top: 0; }
   padding: 5px 7px;
   border: 1px solid var(--border);
   color: var(--muted);
-  font: 7px var(--mono);
+  font: 11px var(--mono);
   letter-spacing: .5px;
 }
 
@@ -603,7 +624,7 @@ h1, h2, p { margin-top: 0; }
   display: flex;
   justify-content: space-between;
   margin-bottom: 7px;
-  font: 9px var(--mono);
+  font: 11px var(--mono);
 }
 
 .stat-head b { color: var(--accent); font-weight: 400; }
@@ -624,7 +645,7 @@ h1, h2, p { margin-top: 0; }
   border: 1px solid var(--border);
   background: transparent;
   color: var(--muted);
-  font: 8px var(--mono);
+  font: 11px var(--mono);
   letter-spacing: 1px;
   cursor: pointer;
   transition: .2s ease;
@@ -678,7 +699,7 @@ h1, h2, p { margin-top: 0; }
 
 .quest-type {
   color: var(--muted-2);
-  font: 8px var(--mono);
+  font: 11px var(--mono);
   letter-spacing: 1px;
 }
 
@@ -704,7 +725,7 @@ h1, h2, p { margin-top: 0; }
 .quest-reward small {
   display: block;
   color: var(--muted-2);
-  font: 7px var(--mono);
+  font: 11px var(--mono);
 }
 
 .quest-reward strong {
@@ -734,7 +755,7 @@ h1, h2, p { margin-top: 0; }
   background: var(--accent-soft);
   color: var(--accent);
   text-align: center;
-  font: 10px/1.5 var(--mono);
+  font: 11px/1.5 var(--mono);
   letter-spacing: 1px;
 }
 
@@ -756,7 +777,7 @@ h1, h2, p { margin-top: 0; }
 .branch-title {
   margin-bottom: 16px;
   color: var(--muted);
-  font: 9px var(--mono);
+  font: 11px var(--mono);
   letter-spacing: 1px;
 }
 
@@ -787,8 +808,8 @@ h1, h2, p { margin-top: 0; }
   border-color: var(--accent-line);
 }
 
-.skill-node b { font: 10px var(--mono); }
-.skill-node small { color: var(--accent); font: 8px var(--mono); }
+.skill-node b { font: 11px var(--mono); }
+.skill-node small { color: var(--accent); font: 11px var(--mono); }
 
 .skill-node.learning {
   border-color: rgba(99,179,255,.2);
@@ -857,13 +878,13 @@ h1, h2, p { margin-top: 0; }
 .map-node span, .map-node small {
   display: block;
   color: var(--muted-2);
-  font: 7px var(--mono);
+  font: 11px var(--mono);
 }
 
 .map-node b {
   display: block;
   margin: 7px 0 4px;
-  font: 10px var(--mono);
+  font: 11px var(--mono);
 }
 
 .map-node.current {
@@ -884,7 +905,7 @@ h1, h2, p { margin-top: 0; }
   bottom: 15px;
   left: 17px;
   color: var(--muted-2);
-  font: 7px var(--mono);
+  font: 11px var(--mono);
 }
 
 /* INVENTORY */
@@ -926,8 +947,8 @@ h1, h2, p { margin-top: 0; }
   font: 700 14px var(--mono);
 }
 
-.item-card b { font: 10px var(--mono); }
-.item-card small { color: var(--muted-2); font: 8px var(--mono); }
+.item-card b { font: 11px var(--mono); }
+.item-card small { color: var(--muted-2); font: 11px var(--mono); }
 
 /* ACHIEVEMENTS */
 
@@ -960,7 +981,7 @@ h1, h2, p { margin-top: 0; }
 
 .achievement small {
   color: var(--accent);
-  font: 7px var(--mono);
+  font: 11px var(--mono);
   letter-spacing: 1px;
 }
 
@@ -1033,7 +1054,7 @@ h1, h2, p { margin-top: 0; }
   color: var(--text);
   text-decoration: none;
   cursor: pointer;
-  font: 9px var(--mono);
+  font: 11px var(--mono);
   letter-spacing: .8px;
   transition: .2s ease;
 }
@@ -1064,7 +1085,7 @@ h1, h2, p { margin-top: 0; }
   padding: 16px 28px;
   border-top: 1px solid var(--border);
   color: var(--muted-2);
-  font: 7px var(--mono);
+  font: 11px var(--mono);
   letter-spacing: 1px;
 }
 
@@ -1133,7 +1154,7 @@ dialog::backdrop {
   border: 1px solid var(--accent-line);
   background: #0b120b;
   color: var(--accent);
-  font: 9px var(--mono);
+  font: 11px var(--mono);
   transform: translateY(30px);
   opacity: 0;
   pointer-events: none;
@@ -1148,7 +1169,7 @@ dialog::backdrop {
 /* RESPONSIVE */
 
 @media (max-width: 950px) {
-  .app-shell { grid-template-columns: 1fr; }
+  .app-shell { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; }
   .sidebar {
     position: sticky;
     top: 72px;
@@ -1168,7 +1189,6 @@ dialog::backdrop {
   }
   #main-nav::-webkit-scrollbar { display: none; }
   .nav-item { flex: 0 0 auto; width: auto; }
-  .nav-item span:last-child { display: none; }
   .nav-key { width: auto; }
   .content { padding: 32px 24px 50px; }
   .skill-columns { grid-template-columns: repeat(2, 1fr); gap: 30px; }
@@ -1177,7 +1197,7 @@ dialog::backdrop {
 @media (max-width: 720px) {
   .topbar { padding: 0 16px; }
   .top-player { display: none; }
-  .system-status { font-size: 8px; }
+  .system-status { font-size: 11px; }
   .topbar-actions { gap: 12px; }
   .character-grid,
   .stats-grid,
