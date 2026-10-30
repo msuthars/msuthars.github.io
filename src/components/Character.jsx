@@ -31,7 +31,7 @@ export default function Character({ active, started }) {
         title="CHARACTER"
         intro="Full stack Drupal developer building long-running client platforms since Drupal 6."
       >
-        <div className="heading-status"><span className="status-dot"></span> ACTIVE PLAYER</div>
+        <a className="heading-status open-to-work" href="#contact"><span className="status-dot"></span> OPEN TO WORK</a>
       </SectionHeading>
 
       <div className="character-grid">

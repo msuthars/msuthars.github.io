@@ -5,6 +5,7 @@ export default function Contact({ active }) {
   return (
     <section id="contact" className={sectionClass(active)}>
       <div className="party-screen panel">
+        <span className="heading-status open-to-work party-status"><span className="status-dot"></span> OPEN TO WORK</span>
         <span className="eyebrow">FINAL QUEST / 007</span>
         <h1>JOIN THE PARTY</h1>
         <p>Have a Drupal project, an upgrade to survive or a technical challenge? Let's build something together.</p>

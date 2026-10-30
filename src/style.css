@@ -177,6 +177,8 @@ button, .nav-item, .quest-card, .skill-node, .item-card, .map-node { -webkit-tap
   padding: 0 13px;
 }
 
+.topbar-actions > * { white-space: nowrap; }
+
 .brand, .top-player, .system-status {
   display: flex;
   align-items: center;
@@ -443,6 +445,20 @@ h1, h2, p { margin-top: 0; }
   gap: 8px;
   align-items: center;
 }
+
+.open-to-work {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.heading-status.open-to-work {
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+}
+
+a.open-to-work:hover { color: var(--text); }
+
+.party-status { margin-bottom: 22px; }
 
 .panel {
   border: 1px solid var(--border);
@@ -1231,6 +1247,7 @@ dialog::backdrop {
 @media (max-width: 460px) {
   .content { padding: 26px 14px 40px; }
   .topbar { height: 62px; }
+  .brand > div:not(.brand-icon) { display: none; }
   .app-shell { min-height: calc(100vh - 62px); }
   .sidebar { top: 62px; }
   .section-heading h1 { font-size: 34px; }
