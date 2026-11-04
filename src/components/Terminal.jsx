@@ -18,7 +18,7 @@ const commands = [
 ];
 
 const welcome = [
-  { kind: "out", content: "MANISH.DEV TERMINAL v1.0" },
+  { kind: "out", content: "MSUTHARS TERMINAL v1.0" },
   { kind: "muted", content: "Type 'help' to see commands. Tab autocompletes, ↑ ↓ browse history, Esc closes." }
 ];
 
@@ -217,7 +217,7 @@ export default function Terminal({ open, onClose, onGoto, onOpenQuest, onPlay })
     >
       <div className="terminal-bar">
         <span className="terminal-dots"><i></i><i></i><i></i></span>
-        <span>guest@manish.dev: ~</span>
+        <span>guest@msuthars: ~</span>
         <button className="modal-close terminal-close" aria-label="Close terminal" onClick={onClose}>×</button>
       </div>
 

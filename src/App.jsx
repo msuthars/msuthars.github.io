@@ -1,5 +1,5 @@
 /* =========================================================
-   MANISH.DEV — PORTFOLIO GAME LOGIC
+   MSUTHARS — PORTFOLIO GAME LOGIC
 ========================================================= */
 
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -143,7 +143,7 @@ export default function App() {
         </div>
 
         <footer className="footer">
-          <span>MANISH.DEV // PLAYER 001</span>
+          <span>MSUTHARS // PLAYER 001</span>
           <span>© {new Date().getFullYear()} ALL SYSTEMS OPERATIONAL</span>
         </footer>
       </div>

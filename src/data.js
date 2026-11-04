@@ -1,5 +1,5 @@
 /* =========================================================
-   MANISH.DEV — PORTFOLIO CONTENT
+   MSUTHARS — PORTFOLIO CONTENT
 ========================================================= */
 
 export const sections = [
@@ -31,10 +31,10 @@ export const profile = [
   ["CURRENT GUILD", "CODECANDY"],
   ["LOCATION", "INDIA / REMOTE"],
   ["EDUCATION", "MCA, 2016"],
-  ["LANGUAGES", "EN / HI / GU / MARWARI"]
+  ["LANGUAGES", "ENGLISH / HINDI / GUJARATI/ PUNJABI / MARWARI"]
 ];
 
-export const quickTags = ["PHP 8", "DRUPAL 11", "CIVICRM", "SOLR", "PHPUNIT", "CYPRESS", "DOCKER"];
+export const quickTags = ["PHP", "DRUPAL 11", "CIVICRM", "SOLR", "PHPUNIT", "CYPRESS", "DOCKER"];
 
 export const stats = [
   ["PHP", 95],
@@ -52,10 +52,10 @@ export const stats = [
 --------------------------------------------------------- */
 
 export const guilds = {
-  codecandy: "CODECANDY / BRIGHT SOLUTIONS · 2022–NOW",
-  qed42: "QED42 · 2019–2022",
-  addweb: "ADDWEB SOLUTION · 2016–2019",
-  softtech: "SOFTTECH INFOSYS · 2015–2016"
+  codecandy: "CODECANDY / BRIGHT SOLUTIONS · 2022-NOW",
+  qed42: "QED42 · 2019-2022",
+  addweb: "ADDWEB SOLUTION · 2016-2019",
+  softtech: "SOFTTECH INFOSYS · 2015-2016"
 };
 
 export const questFilters = [
@@ -73,11 +73,11 @@ export const quests = [
     type: "MAIN QUEST",
     title: "BANKING DOCUMENT MANAGEMENT",
     summary: "Drupal 11 document management system for a bank: book and template sync, publishing, LDAP and PDF output.",
-    tags: ["DRUPAL 11", "PHP 8", "LDAP", "PDF", "PHPUNIT"],
+    tags: ["DRUPAL 11", "PHP", "LDAP", "PDF", "PHPUNIT"],
     reward: 3000,
     mission: "Build and maintain a document management platform used by a bank to author, sync and publish its documentation.",
     systems: [
-      "Book and template synchronisation with publishing workflows",
+      "Book and template synchronization with publishing workflows",
       "LDAP authentication for bank staff",
       "PDF output of published documents",
       "PHPUnit kernel tests covering the backend logic"
@@ -173,7 +173,7 @@ export const quests = [
     mission: "Support scalable enterprise deployments across many sites sharing a single codebase and content source.",
     systems: [
       "Acquia Cloud Site Factory multi-site management",
-      "Acquia Content Hub configured and synchronised across sites",
+      "Acquia Content Hub configured and synchronized across sites",
       "Performance tuning with Drupal aggregation and caching",
       "Custom modules, themes and third-party API integrations"
     ]
@@ -245,11 +245,11 @@ export const quests = [
     type: "BOSS QUEST",
     title: "LEGACY MIGRATIONS",
     summary: "Complex data migrations from Drupal 6 and 7 to Drupal 8 with core and custom migrate plugins.",
-    tags: ["DRUPAL 6 → 8", "DRUPAL 7 → 8", "MIGRATE", "FEEDS"],
+    tags: ["DRUPAL 6 → 7", "DRUPAL 7 → 8", "DRUPAL 8 → 9 → 10 → 11", "MIGRATE", "FEEDS"],
     reward: 2500,
     mission: "Bring clients off end-of-life Drupal versions with minimal downtime.",
     systems: [
-      "Drupal 6 → 8 and 7 → 8 upgrades",
+      "Drupal 6 → 7, 7 → 8 and 8 → 9 → 10 → 11 upgrades",
       "Default and custom migrate plugins",
       "Feeds module integration"
     ]
@@ -296,15 +296,23 @@ export function questEyebrow(quest) {
    SKILLS & INVENTORY
 --------------------------------------------------------- */
 
+/* key: [name, category, level, description, optional learning path] */
 export const skillInfo = {
-  PHP: ["PHP", "Core backend language", "LVL 95", "PHP 8.x across Drupal, WordPress and custom backend systems, up to PHP 8.4."],
+  PHP: ["PHP", "Core backend language", "LVL 95", "My main language and where the journey began: core PHP first, then one project each with Yii and Laravel, custom WordPress themes and plugins, and finally Drupal, from Drupal 6 to Drupal 11.",
+    ["CORE PHP", "YII · 1 PROJECT", "LARAVEL · 1 PROJECT", "WORDPRESS", "DRUPAL"]],
   Drupal: ["Drupal", "CMS / Application Framework", "LVL 93", "9 years with Drupal 6 through 11: custom modules, themes, migrations, upgrades, APIs and commerce."],
   CiviCRM: ["CiviCRM", "CRM", "LVL 80", "Tender management and event sites built on Drupal 7 + CiviCRM."],
   MySQL: ["MySQL", "Database", "LVL 88", "MySQL / MariaDB and Redis for relational data, caching and application integration."],
   API: ["REST API", "Integrations", "LVL 90", "Custom REST endpoints, JSON:API, OAuth and third-party integrations such as QuickBooks and Zoho."],
   JavaScript: ["JavaScript", "Frontend", "LVL 75", "Interactive interfaces with HTML, CSS, JavaScript and jQuery."],
-  SASS: ["SASS", "Styling", "LVL 75", "SASS and Bootstrap for Drupal and WordPress theming."],
-  WordPress: ["WordPress", "CMS", "LVL 70", "Custom plugins and themes, where the journey started."],
+  SASS: ["SASS", "Styling", "LVL 75", "SASS for Drupal and WordPress theming."],
+  CSS: ["CSS", "Styling", "LVL 75", "CSS for theming the site."],
+  HTML: ["HTML", "Styling", "LVL 75", "HTML for structuring and organizing content of the site."],
+  Bootstrap: ["Bootstrap", "Styling", "LVL 75", "Bootstrap for responsive UI."],
+  Tailwind: ["Tailwind CSS", "Styling", "LVL 75", "Tailwind framework for responsive UI."],
+  WordPress: ["WordPress", "CMS", "LVL 70", "Custom plugins and themes, before moving on to Drupal."],
+  Laravel: ["Laravel", "PHP Framework", "LVL 40", "Delivered one project with Laravel and comfortable working with it: routing, Eloquent models, migrations, Blade and REST APIs. Currently building a Laravel API backend for this portfolio."],
+  Yii: ["Yii", "PHP Framework", "LVL 35", "Delivered one project with Yii early in my PHP career and comfortable picking up Yii's MVC codebases again."],
   React: ["React", "Frontend Framework", "LVL 45", "Current learning path focused on modern component-based UI."],
   PHPUnit: ["PHPUnit", "Testing", "LVL 85", "Kernel tests that keep Drupal backend functionality robust."],
   Cypress: ["Cypress", "Testing", "LVL 80", "End-to-end tests validating Drupal workflows and UI interactions."],
@@ -313,55 +321,71 @@ export const skillInfo = {
   Git: ["Git / CI", "Version Control", "LVL 85", "Git on GitHub and GitLab with CI/CD pipelines."],
   Docker: ["Docker", "Development", "LVL 70", "Containerized local development with Docker and DDEV."],
   Lagoon: ["Lagoon", "Hosting", "LVL 65", "Deploying Drupal sites on the Lagoon container platform."],
+  DDEV: ["DDEV", "Development", "LVL 70", "Local development with DDEV."],
   n8n: ["n8n", "Automation", "LVL 70", "Workflow automation, e.g. syncing GitLab issue boards with Trello."]
 };
 
 /* [skill key, label, level, learning?] */
 export const skillTree = [
   ["BACKEND", [
-    ["PHP", "PHP 8", 95],
+    ["PHP", "PHP", 95],
     ["Drupal", "DRUPAL", 93],
     ["CiviCRM", "CIVICRM", 80],
     ["MySQL", "MYSQL", 88],
-    ["API", "REST API", 90]
+    ["API", "REST API", 90],
+    ["WordPress", "WORDPRESS", 70],
+    ["Laravel", "LARAVEL", 40],
+    ["Yii", "YII", 35]
   ]],
   ["FRONTEND", [
+    ["HTML", "HTML", 75],
     ["JavaScript", "JAVASCRIPT", 75],
+    ["CSS", "CSS", 75],
     ["SASS", "SASS", 75],
-    ["WordPress", "WORDPRESS", 70],
+    ["Bootstrap", "BOOTSTRAP", 75],
+    ["Tailwind", "TAILWIND", 50, true],
     ["React", "REACT", 45, true]
   ]],
   ["QUALITY", [
     ["PHPUnit", "PHPUNIT", 85],
-    ["Cypress", "CYPRESS", 80],
-    ["Solr", "SOLR", 80]
+    ["Cypress", "CYPRESS", 80]
   ]],
   ["TOOLS", [
     ["Git", "GIT / CI", 85],
     ["Docker", "DOCKER", 70],
     ["Lagoon", "LAGOON", 65],
-    ["n8n", "N8N", 70]
+    ["n8n", "N8N", 70],
+    ["DDEV", "DDEV", 70],
+    ["Solr", "SOLR", 80]
   ]]
 ];
 
 /* [skill key, icon, label, level] */
+/* [skill key, logo file in public/assets/logos, label, level, brand colour] */
 export const inventory = [
-  ["PHP", "PHP", "PHP 8", 95],
-  ["Drupal", "DRP", "DRUPAL", 93],
-  ["API", "API", "REST API", 90],
-  ["MySQL", "SQL", "MYSQL", 88],
-  ["PHPUnit", "PU", "PHPUNIT", 85],
-  ["Git", "GIT", "GIT / CI", 85],
-  ["Stripe", "$", "COMMERCE", 85],
-  ["CiviCRM", "CRM", "CIVICRM", 80],
-  ["Solr", "SLR", "SOLR", 80],
-  ["Cypress", "CY", "CYPRESS", 80],
-  ["JavaScript", "JS", "JAVASCRIPT", 75],
-  ["SASS", "CSS", "SASS", 75],
-  ["Docker", "D", "DOCKER", 70],
-  ["n8n", "N8N", "N8N", 70],
-  ["WordPress", "WP", "WORDPRESS", 70],
-  ["React", "R", "REACT", 45]
+  ["PHP", "php", "PHP", 95, "#777BB4"],
+  ["Drupal", "drupal", "DRUPAL", 93, "#0678BE"],
+  ["API", "api", "REST API", 90, "#8cff3b"],
+  ["MySQL", "mysql", "MYSQL", 88, "#4479A1"],
+  ["PHPUnit", "phpunit", "PHPUNIT", 85, "#3C9CD7"],
+  ["Git", "git", "GIT / CI", 85, "#F03C2E"],
+  ["Stripe", "stripe", "COMMERCE", 85, "#635BFF"],
+  ["CiviCRM", "civicrm", "CIVICRM", 80, "#81C459"],
+  ["Solr", "apachesolr", "SOLR", 80, "#D9411E"],
+  ["Cypress", "cypress", "CYPRESS", 80, "#69D3A7"],
+  ["JavaScript", "javascript", "JAVASCRIPT", 75, "#F7DF1E"],
+  ["HTML", "html", "HTML", 75, "#E34F26"],
+  ["CSS", "css", "CSS", 75, "#1572B6"],
+  ["SASS", "sass", "SASS", 75, "#CC6699"],
+  ["Bootstrap", "bootstrap", "BOOTSTRAP", 75, "#563d7c"],
+  ["Tailwind", "tailwind", "TAILWIND CSS", 50, "#38B2AC"],
+  ["Docker", "docker", "DOCKER", 70, "#2496ED"],
+  ["DDEV", "ddev", "DDEV", 70, "#02A8E2"],
+  ["n8n", "n8n", "N8N", 70, "#EA4B71"],
+  ["WordPress", "wordpress", "WORDPRESS", 70, "#21759B"],
+  ["React", "react", "REACT", 45, "#61DAFB"],
+  ["Laravel", "laravel", "LARAVEL", 40, "#FF2D20"],
+  ["Yii", "yii", "YII", 35, "#40B3D8"]
 ];
 
 /* ---------------------------------------------------------
@@ -370,23 +394,23 @@ export const inventory = [
 
 /* [location key, css class, years, name, role] */
 export const mapNodes = [
-  ["academy", "origin", "2013–2016", "ACADEMY", "BCA / MCA"],
-  ["softtech", "php", "2015–2016", "SOFTTECH", "PHP DEVELOPER"],
-  ["addweb", "drupal", "2016–2019", "ADDWEB", "SOFTWARE ENGINEER"],
-  ["qed42", "api", "2019–2022", "QED42", "SENIOR DRUPAL DEV"],
-  ["codecandy", "current", "2022–NOW", "CODECANDY", "FULL STACK DEV"]
+  ["academy", "origin map-lower", "2013-2016", "ACADEMY", "BCA / MCA"],
+  ["softtech", "php map-upper", "2015-2016", "SOFTTECH", "PHP DEVELOPER"],
+  ["addweb", "drupal map-lower", "2016-2019", "ADDWEB", "SOFTWARE ENGINEER"],
+  ["qed42", "api map-upper", "2019-2022", "QED42", "SENIOR DRUPAL DEV"],
+  ["codecandy", "current map-lower", "2022-NOW", "CODECANDY", "FULL STACK DEV"]
 ];
 
 export const locations = {
-  academy: ["ACADEMY", "EDUCATION / 2013–2016", "The starting chapter: learning the foundations of programming and information technology.", [
+  academy: ["ACADEMY", "EDUCATION / 2013-2016", "The starting chapter: learning the foundations of programming and information technology.", [
     "Bachelor of Computer Application, IT — D.R. B.R. Ambedkar Govt. College, Sri Ganganagar, RJ (2013)",
     "Master of Computer Application, IT — L J Institute of Management Studies, Ahmedabad, GJ (2016)"
   ]],
-  softtech: ["SOFTTECH INFOSYS", "PHP DEVELOPER / MAR 2015 – MAY 2016 / AHMEDABAD", "PHP development internship and first professional quests.", [
+  softtech: ["SOFTTECH INFOSYS", "PHP DEVELOPER / MAR 2015 - MAY 2016 / AHMEDABAD", "PHP development internship and first professional quests.", [
     "Hands-on experience with WordPress",
     "Custom plugins and themes to extend WordPress functionality"
   ]],
-  addweb: ["ADDWEB SOLUTION", "SOFTWARE ENGINEER / JUN 2016 – JUN 2019 / AHMEDABAD", "Entering Drupal territory: full-stack Drupal development, commerce and integrations.", [
+  addweb: ["ADDWEB SOLUTION", "SOFTWARE ENGINEER / JUN 2016 - JUN 2019 / AHMEDABAD", "Entering Drupal territory: full-stack Drupal development, commerce and integrations.", [
     "Drupal 7 → 8 upgrade projects with minimal downtime",
     "Custom modules and themes, front-end theming and back-end implementation",
     "Drupal Commerce with Stripe, GlobalOne Payment and PayPal",
@@ -394,7 +418,7 @@ export const locations = {
     "Drupal 6 → 8 migrations with custom plugins and Feeds",
     "Invoice integrations with QuickBooks and Zoho"
   ]],
-  qed42: ["QED42", "SENIOR DRUPAL DEVELOPER / JUN 2019 – JUL 2022 / PUNE", "Enterprise Drupal: multi-site platforms, performance and major upgrades.", [
+  qed42: ["QED42", "SENIOR DRUPAL DEVELOPER / JUN 2019 - JUL 2022 / PUNE", "Enterprise Drupal: multi-site platforms, performance and major upgrades.", [
     "Multi-site architecture on Acquia Cloud Site Factory",
     "Acquia Content Hub synchronised across sites",
     "Drupal 7 → 8 migration and Drupal 8 → 9 core upgrades",
@@ -403,7 +427,7 @@ export const locations = {
     "Code and patches contributed to Drupal.org",
     "Earned Acquia Certified Drupal Backend Specialist — Drupal 9 (July 2021)"
   ]],
-  codecandy: ["CODECANDY", "FULL STACK DEVELOPER / JUL 2022 – NOW / REMOTE (BRIGHT SOLUTIONS, GERMANY)", "The current chapter: long-running client platforms for Bright Solutions in Germany.", [
+  codecandy: ["CODECANDY", "FULL STACK DEVELOPER / JUL 2022 - NOW / REMOTE (BRIGHT SOLUTIONS, GERMANY)", "The current chapter: long-running client platforms for Bright Solutions in Germany.", [
     "RESTful JSON APIs and custom REST endpoints in Drupal",
     "PHPUnit kernel tests and Cypress end-to-end tests",
     "Drupal core upgrades 8 → 9 → 10 → 11",
@@ -430,13 +454,18 @@ export const achievements = [
 ];
 
 export const contactLinks = [
-  ["GITHUB", "https://github.com/msuthars"],
-  ["LINKEDIN", "https://www.linkedin.com/in/msuthars/"],
-  ["DRUPAL.ORG", "https://www.drupal.org/u/msuthars"]
+  ["GITHUB", "https://github.com/msuthars", "icon-github"],
+  ["LINKEDIN", "https://www.linkedin.com/in/msuthars/", "icon-linkedin"],
+  ["DRUPAL.ORG", "https://www.drupal.org/u/msuthars", "icon-drupal"],
+  ["Dr. Hotfix", "https://www.youtube.com/@Drhotfix", "icon-youtube"]
 ];
 
 export const email = "msuthar1994@gmail.com";
 
+export const youtube = "https://www.youtube.com/@Drhotfix";
+
 export const resume = {
   page: `${import.meta.env.BASE_URL}resume/`,
 };
+
+export const openToWork = true;

@@ -1,5 +1,5 @@
 /* =========================================================
-   MANISH.DEV — MODERN GAME UI
+   MSUTHARS — MODERN GAME UI
 ========================================================= */
 
 :root {
@@ -179,7 +179,7 @@ button, .nav-item, .quest-card, .skill-node, .item-card, .map-node { -webkit-tap
 
 .topbar-actions > * { white-space: nowrap; }
 
-.brand, .top-player, .system-status {
+.brand, .top-player, .topbar-youtube {
   display: flex;
   align-items: center;
 }
@@ -240,12 +240,26 @@ button, .nav-item, .quest-card, .skill-node, .item-card, .map-node { -webkit-tap
 
 .mini-avatar, .avatar-large img { border-radius: 50%; }
 
-.system-status {
+.topbar-youtube {
   gap: 8px;
   color: var(--muted);
   font: 11px var(--mono);
   letter-spacing: 1px;
+  text-decoration: none;
+  transition: color .2s ease;
 }
+
+.youtube-logo {
+  width: 18px;
+  height: 18px;
+  background: currentColor;
+  -webkit-mask: url(/assets/logos/youtube.svg) center / contain no-repeat;
+  mask: url(/assets/logos/youtube.svg) center / contain no-repeat;
+  transition: background-color .2s ease;
+}
+
+.topbar-youtube:hover { color: var(--text); }
+.topbar-youtube:hover .youtube-logo { background: #FF0000; }
 
 .status-dot {
   width: 7px;
@@ -453,6 +467,53 @@ h1, h2, p { margin-top: 0; }
 }
 
 a.open-to-work:hover { border-color: var(--border-strong); }
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.heading-status.open-to-work {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.heading-status.open-to-work::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;               /* border thickness */
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--angle),
+    transparent 0deg,
+    transparent 240deg,
+    #22c55e 360deg            /* spinner color */
+  );
+  /* cut out the middle so only the ring remains */
+  -webkit-mask: linear-gradient(#000 0 0) content-box,
+                linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box,
+                linear-gradient(#000 0 0);
+          mask-composite: exclude;
+  animation: border-spin 1.5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes border-spin {
+  to { --angle: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heading-status.open-to-work::before { animation: none; }
+}
 
 .heading-status.party-status { align-self: center; margin-bottom: 22px; }
 
@@ -906,11 +967,13 @@ a.open-to-work:hover { border-color: var(--border-strong); }
 
 .map-node.current b { color: var(--accent); }
 
-.origin { left: 12%; top: 62%; }
-.php { left: 32%; top: 43%; }
-.drupal { left: 51%; top: 58%; }
-.api { left: 70%; top: 37%; }
-.current { left: 88%; top: 53%; }
+.origin { left: 12%;}
+.php { left: 32%;}
+.drupal { left: 51%;}
+.api { left: 70%;}
+.current { left: 88%;}
+.map-lower { top: 57.9%; }
+.map-upper { top: 42.2%; }
 
 .map-coordinates {
   position: absolute;
@@ -955,12 +1018,64 @@ a.open-to-work:hover { border-color: var(--border-strong); }
   place-items: center;
   border: 1px solid var(--border-strong);
   background: rgba(255,255,255,.035);
-  color: var(--accent);
-  font: 700 14px var(--mono);
+  transition: border-color .25s ease;
 }
+
+/* Logo SVGs are used as a mask so they take the theme colour, then the brand colour on hover */
+.item-logo {
+  width: 32px;
+  height: 32px;
+  background: var(--accent);
+  -webkit-mask: var(--logo) center / contain no-repeat;
+  mask: var(--logo) center / contain no-repeat;
+  transition: background-color .25s ease, transform .25s ease;
+}
+
+.item-card:hover .item-logo,
+.item-card:focus-visible .item-logo {
+  background: var(--brand);
+  transform: scale(1.08);
+}
+
+.item-card:hover .item-icon { border-color: var(--brand); }
 
 .item-card b { font: 11px var(--mono); }
 .item-card small { color: var(--muted-2); font: 11px var(--mono); }
+
+/* Learning path in the skill modal: CORE PHP → YII → ... */
+.skill-path {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+}
+
+.skill-path li {
+  padding: 6px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  color: var(--text);
+  font: 11px var(--mono);
+}
+
+.skill-path li:last-child {
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* Arrow sits in the gap before each step, outside the chip border */
+.skill-path li { position: relative; }
+.skill-path li + li { margin-left: 18px; }
+.skill-path li + li::before {
+  content: "→";
+  position: absolute;
+  left: -21px;
+  color: var(--muted-2);
+}
 
 /* ACHIEVEMENTS */
 
@@ -1089,6 +1204,24 @@ a.open-to-work:hover { border-color: var(--border-strong); }
   box-shadow: 0 0 30px rgba(140,255,59,.25);
 }
 
+/* Button icons: the SVG is used as a mask so it takes the button's text colour */
+.icon-github, .icon-linkedin, .icon-drupal, .icon-youtube, .icon-file, .icon-email {
+  flex: none;
+  width: 15px;
+  height: 15px;
+  margin-right: 8px;
+  background: currentColor;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+}
+
+.icon-github { --icon: url(/assets/logos/github.svg); }
+.icon-linkedin { --icon: url(/assets/logos/linkedin.svg); }
+.icon-drupal { --icon: url(/assets/logos/drupal.svg); }
+.icon-youtube { --icon: url(/assets/logos/youtube.svg); }
+.icon-file { --icon: url(/assets/logos/file.svg); }
+.icon-email { --icon: url(/assets/logos/email.svg); }
+
 /* FOOTER */
 
 .footer {
@@ -1209,7 +1342,7 @@ dialog::backdrop {
 @media (max-width: 720px) {
   .topbar { padding: 0 16px; }
   .top-player { display: none; }
-  .system-status { font-size: 11px; }
+  .topbar-youtube { font-size: 11px; }
   .topbar-actions { gap: 12px; }
   .character-grid,
   .stats-grid,
@@ -1440,7 +1573,7 @@ dialog.bughunter {
 }
 
 @media (max-width: 360px) {
-  .system-status { display: none; }
+  .topbar-youtube span { display: none; }
 }
 
 /* REDUCED MOTION */

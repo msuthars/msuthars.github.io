@@ -1,13 +1,13 @@
-import { resume } from "../data.js";
+import { resume, youtube } from "../data.js";
 import { avatar } from "./avatar.js";
 
 export default function Topbar() {
   return (
     <header className="topbar">
       <div className="brand">
-        <div className="brand-icon">M<span>.</span></div>
+        <div className="brand-icon">M.</div>
         <div>
-          <strong>MANISH.DEV</strong>
+          <strong>MSUTHARS</strong>
           <small>DEVELOPER RPG</small>
         </div>
       </div>
@@ -21,10 +21,10 @@ export default function Topbar() {
       </div>
 
       <div className="topbar-actions">
-        <div className="system-status">
-          <span className="status-dot"></span>
-          <span>ONLINE</span>
-        </div>
+        <a className="topbar-youtube" href={youtube} target="_blank" rel="noopener" aria-label="My gaming channel on YouTube">
+          <i className="youtube-logo" aria-hidden="true"></i>
+          <span>GAMING</span>
+        </a>
         <a className="btn topbar-resume" href={resume.page} target="_blank" rel="noopener">RESUME ↗</a>
       </div>
     </header>

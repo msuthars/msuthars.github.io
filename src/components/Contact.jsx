@@ -1,20 +1,22 @@
-import { contactLinks, email, resume } from "../data.js";
+import { contactLinks, email, resume, openToWork } from "../data.js";
 import { sectionClass } from "./SectionHeading.jsx";
 
 export default function Contact({ active, onPlay }) {
   return (
     <section id="contact" className={sectionClass(active)}>
       <div className="party-screen panel">
-        <span className="heading-status open-to-work party-status"><span className="status-dot"></span> OPEN TO WORK</span>
+        { openToWork == true &&
+          <span className="heading-status open-to-work party-status"><span className="status-dot"></span> OPEN TO WORK</span>
+        }
         <span className="eyebrow">FINAL QUEST / 007</span>
         <h1>JOIN THE PARTY</h1>
         <p>Have a Drupal project, an upgrade to survive or a technical challenge? Let's build something together.</p>
         <div className="party-actions">
-          {contactLinks.map(([label, href]) => (
-            <a key={label} className="btn" href={href} target="_blank" rel="noopener">{label}</a>
+          {contactLinks.map(([label, href, className]) => (
+            <a key={label} className="btn" href={href} target="_blank" rel="noopener"><span className={className}></span> {label}</a>
           ))}
-          <a className="btn" href={resume.page} target="_blank" rel="noopener">VIEW RESUME</a>
-          <a className="btn btn-primary" href={`mailto:${email}`}>SEND MESSAGE</a>
+          <a className="btn" href={resume.page} target="_blank" rel="noopener"><span className="icon-file"></span> VIEW RESUME</a>
+          <a className="btn btn-primary" href={`mailto:${email}`}><span className="icon-email"></span> SEND MESSAGE</a>
         </div>
         <button className="party-game" onClick={onPlay}>
           <span>🐛</span> BONUS STAGE: <b>PLAY BUG HUNTER</b> →

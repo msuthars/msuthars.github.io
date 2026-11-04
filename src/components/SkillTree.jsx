@@ -1,17 +1,12 @@
 import { skillInfo, skillTree } from "../data.js";
 import SectionHeading, { sectionClass } from "./SectionHeading.jsx";
+import SkillDetail from "./SkillDetail.jsx";
 
 export default function SkillTree({ active, openDetail }) {
   function showSkill(key) {
     const data = skillInfo[key];
     if (!data) return;
-    openDetail(data[0], data[1], (
-      <>
-        <p><strong>{data[1]}</strong></p>
-        <p>{data[3]}</p>
-        <p><strong>Current level:</strong> {data[2]}</p>
-      </>
-    ));
+    openDetail(data[0], data[1], <SkillDetail skill={data} />);
   }
 
   return (
