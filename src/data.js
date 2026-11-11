@@ -12,6 +12,25 @@ export const sections = [
   { id: "contact", label: "JOIN PARTY" }
 ];
 
+/* Each section has its own URL. Trailing slashes match how GitHub Pages serves the pre-rendered
+   folders (dist/quests/index.html is served at /quests/). */
+export function sectionPath(id) {
+  return id === "character" ? "/" : `/${id}/`;
+}
+
+/* Section id for a URL path, or null if it isn't a section */
+export function sectionFromPath(pathname) {
+  const id = pathname.replace(/^\/+|\/+$/g, "") || "character";
+  return sections.some(section => section.id === id) ? id : null;
+}
+
+export const siteTitle = "MSUTHARS — Developer RPG";
+
+export function sectionTitle(id) {
+  const section = sections.find(s => s.id === id);
+  return id === "character" || !section ? siteTitle : `${section.label} · ${siteTitle}`;
+}
+
 export const bootMessages = [
   "Loading player profile",
   "Loading skill matrix",
@@ -392,13 +411,13 @@ export const inventory = [
    WORLD MAP
 --------------------------------------------------------- */
 
-/* [location key, css class, years, name, role] */
+/* [location key, Tailwind position classes (desktop, then mobile), years, name, role, current?] */
 export const mapNodes = [
-  ["academy", "origin map-lower", "2013-2016", "ACADEMY", "BCA / MCA"],
-  ["softtech", "php map-upper", "2015-2016", "SOFTTECH", "PHP DEVELOPER"],
-  ["addweb", "drupal map-lower", "2016-2019", "ADDWEB", "SOFTWARE ENGINEER"],
-  ["qed42", "api map-upper", "2019-2022", "QED42", "SENIOR DRUPAL DEV"],
-  ["codecandy", "current map-lower", "2022-NOW", "CODECANDY", "FULL STACK DEV"]
+  ["academy", "left-[12%] top-[57.9%] mobile:left-[30%] mobile:top-[12%]", "2013-2016", "ACADEMY", "BCA / MCA"],
+  ["softtech", "left-[32%] top-[42.2%] mobile:left-[70%] mobile:top-[31%]", "2015-2016", "SOFTTECH", "PHP DEVELOPER"],
+  ["addweb", "left-[51%] top-[57.9%] mobile:left-[30%] mobile:top-[50%]", "2016-2019", "ADDWEB", "SOFTWARE ENGINEER"],
+  ["qed42", "left-[70%] top-[42.2%] mobile:left-[70%] mobile:top-[69%]", "2019-2022", "QED42", "SENIOR DRUPAL DEV"],
+  ["codecandy", "left-[88%] top-[57.9%] mobile:left-[30%] mobile:top-[88%]", "2022-NOW", "CODECANDY", "FULL STACK DEV", true]
 ];
 
 export const locations = {
@@ -454,13 +473,17 @@ export const achievements = [
 ];
 
 export const contactLinks = [
-  ["GITHUB", "https://github.com/msuthars", "icon-github"],
-  ["LINKEDIN", "https://www.linkedin.com/in/msuthars/", "icon-linkedin"],
-  ["DRUPAL.ORG", "https://www.drupal.org/u/msuthars", "icon-drupal"],
-  ["Dr. Hotfix", "https://www.youtube.com/@Drhotfix", "icon-youtube"]
+  ["GITHUB", "https://github.com/msuthars", "github"],
+  ["LINKEDIN", "https://www.linkedin.com/in/msuthars/", "linkedin"],
+  ["DRUPAL.ORG", "https://www.drupal.org/u/msuthars", "drupal"],
+  ["Dr. Hotfix", "https://www.youtube.com/@Drhotfix", "youtube"]
 ];
 
 export const email = "msuthar1994@gmail.com";
+
+/* Web3Forms access key for the contact form (get one free at https://web3forms.com).
+   It is safe to publish: the key can only send messages to your own inbox. */
+export const web3formsKey = "d0d6c9d7-ec82-4f9e-95c6-af553ba7a777";
 
 export const youtube = "https://www.youtube.com/@Drhotfix";
 

@@ -3,7 +3,8 @@
 ========================================================= */
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { questEyebrow, sections } from "./data.js";
+import { useLocation, useNavigate } from "react-router";
+import { questEyebrow, sectionFromPath, sectionPath, sections, sectionTitle } from "./data.js";
 import BootScreen from "./components/BootScreen.jsx";
 import Topbar from "./components/Topbar.jsx";
 import Sidebar from "./components/Sidebar.jsx";
@@ -11,6 +12,7 @@ import DetailModal from "./components/DetailModal.jsx";
 import Toast from "./components/Toast.jsx";
 import Terminal from "./components/Terminal.jsx";
 import BugHunter from "./components/BugHunter.jsx";
+import ContactForm from "./components/ContactForm.jsx";
 import QuestDetail from "./components/QuestDetail.jsx";
 import Character from "./components/Character.jsx";
 import Quests from "./components/Quests.jsx";
@@ -35,12 +37,6 @@ function isBooting() {
   return typeof document !== "undefined" && document.documentElement.classList.contains("is-booting");
 }
 
-function sectionFromHash() {
-  if (typeof window === "undefined") return "character";
-  const id = window.location.hash.slice(1);
-  return sections.some(section => section.id === id) ? id : "character";
-}
-
 function isTyping() {
   const tag = document.activeElement?.tagName?.toLowerCase();
   return tag === "input" || tag === "textarea";
@@ -48,10 +44,13 @@ function isTyping() {
 
 export default function App() {
   const [started, setStarted] = useState(() => !isBooting());
-  const [active, setActive] = useState(sectionFromHash);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const active = sectionFromPath(location.pathname) ?? "character";
   const [detail, setDetail] = useState(null);
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [gameOpen, setGameOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
   const [toast, setToast] = useState({ message: "", show: false });
   const toastTimer = useRef();
 
@@ -63,18 +62,21 @@ export default function App() {
     }, 1800);
   }, []);
 
-  /* Each section has its own URL (#quests, #skills…) so it can be linked to */
-  const openSection = useCallback(id => {
-    if (window.location.hash !== `#${id}`) history.pushState(null, "", `#${id}`);
-    setActive(id);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+  /* Each section has its own URL (/quests/, /skills/…) so it can be linked to */
+  const openSection = useCallback(id => navigate(sectionPath(id)), [navigate]);
 
+  /* Old #hash links (#quests) and unknown paths go to the matching section URL */
   useEffect(() => {
-    const onPopState = () => setActive(sectionFromHash());
-    window.addEventListener("popstate", onPopState);
-    return () => window.removeEventListener("popstate", onPopState);
-  }, []);
+    const fromHash = location.hash && sectionFromPath(location.hash.slice(1));
+    if (fromHash) navigate(sectionPath(fromHash), { replace: true });
+    else if (!sectionFromPath(location.pathname)) navigate("/", { replace: true });
+  }, [location.hash, location.pathname, navigate]);
+
+  /* Start each section at the top, and name the tab after it */
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    document.title = sectionTitle(active);
+  }, [active]);
 
   const openDetail = useCallback((title, eyebrow, body) => {
     setDetail({ title, eyebrow, body });
@@ -87,7 +89,7 @@ export default function App() {
   /* Keyboard shortcuts: 1–7 jump to sections, ` or / opens the terminal (ESC is handled by <dialog>) */
   useEffect(() => {
     function onKeyDown(event) {
-      if (!started || isTyping() || terminalOpen || gameOpen || event.metaKey || event.ctrlKey || event.altKey) return;
+      if (!started || isTyping() || terminalOpen || gameOpen || contactOpen || event.metaKey || event.ctrlKey || event.altKey) return;
       if (event.key === "`" || event.key === "/") {
         event.preventDefault();
         setDetail(null);
@@ -99,10 +101,11 @@ export default function App() {
     }
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [started, terminalOpen, gameOpen, openSection]);
+  }, [started, terminalOpen, gameOpen, contactOpen, openSection]);
 
   const openTerminal = useCallback(() => setTerminalOpen(true), []);
   const openGame = useCallback(() => setGameOpen(true), []);
+  const openContact = useCallback(() => setContactOpen(true), []);
 
   /* Subtle pointer glow */
   useEffect(() => {
@@ -124,25 +127,25 @@ export default function App() {
 
   return (
     <>
-      <div className="noise"></div>
+      <div className="pointer-events-none fixed inset-0 z-1000 opacity-[.025] bg-noise"></div>
 
       {!started && <BootScreen onStart={handleStart} />}
 
-      <div id="app" className="app">
+      <div id="app" className="min-h-screen">
         <Topbar />
 
-        <div className="app-shell">
-          <Sidebar active={active} onSelect={openSection} onTerminal={openTerminal} />
+        <div className="grid grid-cols-[230px_minmax(0,1fr)] min-h-[calc(100vh-72px)] tablet:grid-cols-[minmax(0,1fr)] tablet:grid-rows-[auto_1fr] phone:min-h-[calc(100vh-62px)]">
+          <Sidebar active={active} onTerminal={openTerminal} />
 
-          <main className="content">
+          <main className="w-[min(1250px,100%)] mx-auto pt-10.5 px-10.5 pb-15 tablet:pt-8 tablet:px-6 tablet:pb-[50px] phone:pt-[26px] phone:px-3.5 phone:pb-10">
             {sections.map(({ id }) => {
               const Section = sectionComponents[id];
-              return <Section key={id} active={active === id} started={started} openDetail={openDetail} onPlay={openGame} />;
+              return <Section key={id} active={active === id} started={started} openDetail={openDetail} onPlay={openGame} onMessage={openContact} />;
             })}
           </main>
         </div>
 
-        <footer className="footer">
+        <footer className="flex justify-between py-4 px-7 border-t border-line text-muted-2 font-mono text-2xs tracking-[1px] mobile:gap-2.5 mobile:flex-col">
           <span>MSUTHARS // PLAYER 001</span>
           <span>© {new Date().getFullYear()} ALL SYSTEMS OPERATIONAL</span>
         </footer>
@@ -160,6 +163,7 @@ export default function App() {
         onPlay={() => { setTerminalOpen(false); setGameOpen(true); }}
       />
       <BugHunter open={gameOpen} onClose={() => setGameOpen(false)} />
+      <ContactForm open={contactOpen} onClose={() => setContactOpen(false)} />
       <Toast {...toast} />
     </>
   );

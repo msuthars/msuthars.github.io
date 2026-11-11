@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { contactLinks, email, guilds, quests, resume, sections, skillInfo } from "../data.js";
 import useDialog from "./useDialog.js";
+import { dialogBase, modalClose } from "./ui.jsx";
+
+const lineColors = { out: "text-ink", cmd: "text-ink mt-2", muted: "text-muted", accent: "text-accent", err: "text-danger" };
+const dot = "w-2.5 h-2.5 rounded-full";
 
 /* [command, usage, description] — shown by `help` and used for Tab completion */
 const commands = [
@@ -210,29 +214,30 @@ export default function Terminal({ open, onClose, onGoto, onOpenQuest, onPlay })
   return (
     <dialog
       ref={dialog}
-      className="terminal"
+      className={`${dialogBase} w-[min(760px,calc(100%-24px))] overflow-hidden border-accent-line bg-[#05070a] shadow-[0_30px_100px_rgba(0,0,0,.7),0_0_60px_rgba(140,255,59,.08)]`}
       aria-label="Command terminal"
       onClose={onClose}
       onClick={event => { if (event.target === dialog.current) onClose(); }}
     >
-      <div className="terminal-bar">
-        <span className="terminal-dots"><i></i><i></i><i></i></span>
+      <div className="relative flex items-center gap-3.5 h-11 px-4 border-b border-line bg-panel-solid text-muted font-mono text-2xs">
+        <span className="flex gap-1.5"><i className={`${dot} bg-danger`}></i><i className={`${dot} bg-warning`}></i><i className={`${dot} bg-accent`}></i></span>
         <span>guest@msuthars: ~</span>
-        <button className="modal-close terminal-close" aria-label="Close terminal" onClick={onClose}>×</button>
+        <button className={`${modalClose} top-1.5 right-2`} aria-label="Close terminal" onClick={onClose}>×</button>
       </div>
 
-      <div className="terminal-screen" ref={screen} onClick={() => input.current?.focus()}>
+      <div className="h-[min(440px,62vh)] overflow-y-auto py-4.5 px-5 font-mono text-[13px] leading-[1.65] cursor-text mobile:p-3.5 mobile:text-[12px]" ref={screen} onClick={() => input.current?.focus()}>
         {lines.map((line, index) => (
-          <div key={index} className={`terminal-line ${line.kind}`}>
-            {line.kind === "cmd" && <span className="terminal-prompt">❯ </span>}
+          <div key={index} className={`whitespace-pre-wrap [word-break:break-word] [&_a]:text-blue ${lineColors[line.kind]}`}>
+            {line.kind === "cmd" && <span className="text-accent">❯ </span>}
             {line.content}
           </div>
         ))}
 
-        <form className="terminal-input" onSubmit={submit}>
-          <label htmlFor="terminal-command" className="terminal-prompt">❯</label>
+        <form className="flex gap-2.5 mt-2" onSubmit={submit}>
+          <label htmlFor="terminal-command" className="text-accent">❯</label>
           <input
             id="terminal-command"
+            className="flex-1 min-w-0 border-0 [outline:0] bg-transparent text-ink caret-accent [font:inherit]"
             ref={input}
             value={value}
             onChange={event => setValue(event.target.value)}
